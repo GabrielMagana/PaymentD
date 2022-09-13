@@ -85,7 +85,7 @@ namespace PaymentD
             //DAP://na.miempresa.com
             return "LDAP://" + de.Properties["defaultNamingContext"][0].ToString();
         }
-
+         
         //private void txtPassword_Enter(object sender, EventArgs e)
         //{
         //    btnLogin.PerformClick();

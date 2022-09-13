@@ -43,17 +43,23 @@
             this.cmbArea = new System.Windows.Forms.ComboBox();
             this.cmbMpago = new System.Windows.Forms.ComboBox();
             this.cmbCliente = new System.Windows.Forms.ComboBox();
-            this.cmbEmpleado = new System.Windows.Forms.ComboBox();
             this.cmbMoneda = new System.Windows.Forms.ComboBox();
             this.cmbAsignado = new System.Windows.Forms.ComboBox();
             this.cmbEstatus = new System.Windows.Forms.ComboBox();
             this.txtComentario = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkpago = new System.Windows.Forms.CheckBox();
+            this.chkCaja = new System.Windows.Forms.CheckBox();
             this.btnCrear = new System.Windows.Forms.Button();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtNumeroNomina = new System.Windows.Forms.TextBox();
             this.dtFechaPayment = new System.Windows.Forms.DateTimePicker();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnB2b = new System.Windows.Forms.Button();
             this.btnPayment = new System.Windows.Forms.Button();
@@ -71,8 +77,6 @@
             this.cmbCcostos = new System.Windows.Forms.ComboBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.chkCaja = new System.Windows.Forms.CheckBox();
-            this.chkpago = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -81,111 +85,100 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 31);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(21, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(104, 15);
+            this.label1.Size = new System.Drawing.Size(53, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Payment Porpuse";
+            this.label1.Text = "Concepto";
             // 
             // txtPorpuse
             // 
             this.txtPorpuse.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPorpuse.Location = new System.Drawing.Point(156, 15);
-            this.txtPorpuse.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPorpuse.Location = new System.Drawing.Point(117, 12);
             this.txtPorpuse.Multiline = true;
             this.txtPorpuse.Name = "txtPorpuse";
-            this.txtPorpuse.Size = new System.Drawing.Size(467, 42);
+            this.txtPorpuse.Size = new System.Drawing.Size(351, 35);
             this.txtPorpuse.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(28, 81);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(21, 66);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(81, 15);
+            this.label2.Size = new System.Drawing.Size(29, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Request Area";
+            this.label2.Text = "Área";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 126);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(21, 102);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(68, 15);
+            this.label3.Size = new System.Drawing.Size(71, 13);
             this.label3.TabIndex = 3;
-            this.label3.Text = "Request by";
+            this.label3.Text = "Solicitado por";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(28, 171);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(21, 139);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(97, 15);
+            this.label4.Size = new System.Drawing.Size(85, 13);
             this.label4.TabIndex = 4;
             this.label4.Text = "Metodo de pago";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(28, 432);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(21, 351);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(77, 15);
+            this.label5.Size = new System.Drawing.Size(65, 13);
             this.label5.TabIndex = 8;
             this.label5.Text = "Comentarios";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(28, 386);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Location = new System.Drawing.Point(21, 314);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(47, 15);
+            this.label6.Size = new System.Drawing.Size(42, 13);
             this.label6.TabIndex = 7;
             this.label6.Text = "Estatus";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(29, 305);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Location = new System.Drawing.Point(22, 248);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(53, 15);
+            this.label7.Size = new System.Drawing.Size(46, 13);
             this.label7.TabIndex = 6;
             this.label7.Text = "Moneda";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(29, 347);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Location = new System.Drawing.Point(22, 282);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(68, 15);
+            this.label8.Size = new System.Drawing.Size(60, 13);
             this.label8.TabIndex = 5;
             this.label8.Text = "Asignado a";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(28, 265);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Location = new System.Drawing.Point(21, 215);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(89, 15);
+            this.label9.Size = new System.Drawing.Size(79, 13);
             this.label9.TabIndex = 9;
             this.label9.Text = "Fecha de pago";
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(21, 196);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.checkBox1.Location = new System.Drawing.Point(16, 159);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(108, 19);
+            this.checkBox1.Size = new System.Drawing.Size(95, 17);
             this.checkBox1.TabIndex = 10;
             this.checkBox1.Text = "Es proveedor?";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -194,10 +187,9 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(28, 225);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Location = new System.Drawing.Point(21, 183);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(72, 15);
+            this.label10.Size = new System.Drawing.Size(62, 13);
             this.label10.TabIndex = 11;
             this.label10.Text = "Beneficiario";
             // 
@@ -206,10 +198,9 @@
             this.cmbArea.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbArea.FormattingEnabled = true;
-            this.cmbArea.Location = new System.Drawing.Point(156, 78);
-            this.cmbArea.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbArea.Location = new System.Drawing.Point(117, 63);
             this.cmbArea.Name = "cmbArea";
-            this.cmbArea.Size = new System.Drawing.Size(467, 24);
+            this.cmbArea.Size = new System.Drawing.Size(351, 21);
             this.cmbArea.TabIndex = 13;
             // 
             // cmbMpago
@@ -217,43 +208,28 @@
             this.cmbMpago.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbMpago.FormattingEnabled = true;
-            this.cmbMpago.Location = new System.Drawing.Point(156, 167);
-            this.cmbMpago.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbMpago.Location = new System.Drawing.Point(117, 136);
             this.cmbMpago.Name = "cmbMpago";
-            this.cmbMpago.Size = new System.Drawing.Size(467, 24);
+            this.cmbMpago.Size = new System.Drawing.Size(351, 21);
             this.cmbMpago.TabIndex = 14;
             // 
             // cmbCliente
             // 
             this.cmbCliente.FormattingEnabled = true;
-            this.cmbCliente.Location = new System.Drawing.Point(156, 222);
-            this.cmbCliente.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbCliente.Location = new System.Drawing.Point(117, 180);
             this.cmbCliente.Name = "cmbCliente";
-            this.cmbCliente.Size = new System.Drawing.Size(413, 24);
+            this.cmbCliente.Size = new System.Drawing.Size(351, 21);
             this.cmbCliente.TabIndex = 15;
             this.cmbCliente.SelectedIndexChanged += new System.EventHandler(this.cmbCliente_SelectedIndexChanged);
-            // 
-            // cmbEmpleado
-            // 
-            this.cmbEmpleado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbEmpleado.FormattingEnabled = true;
-            this.cmbEmpleado.Location = new System.Drawing.Point(155, 222);
-            this.cmbEmpleado.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbEmpleado.Name = "cmbEmpleado";
-            this.cmbEmpleado.Size = new System.Drawing.Size(467, 24);
-            this.cmbEmpleado.TabIndex = 16;
-            this.cmbEmpleado.SelectedIndexChanged += new System.EventHandler(this.cmbEmpleado_SelectedIndexChanged);
             // 
             // cmbMoneda
             // 
             this.cmbMoneda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbMoneda.FormattingEnabled = true;
-            this.cmbMoneda.Location = new System.Drawing.Point(156, 302);
-            this.cmbMoneda.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbMoneda.Location = new System.Drawing.Point(117, 245);
             this.cmbMoneda.Name = "cmbMoneda";
-            this.cmbMoneda.Size = new System.Drawing.Size(467, 24);
+            this.cmbMoneda.Size = new System.Drawing.Size(351, 21);
             this.cmbMoneda.TabIndex = 17;
             this.cmbMoneda.SelectedIndexChanged += new System.EventHandler(this.cmbMoneda_SelectedIndexChanged);
             // 
@@ -262,10 +238,9 @@
             this.cmbAsignado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbAsignado.FormattingEnabled = true;
-            this.cmbAsignado.Location = new System.Drawing.Point(156, 343);
-            this.cmbAsignado.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbAsignado.Location = new System.Drawing.Point(117, 279);
             this.cmbAsignado.Name = "cmbAsignado";
-            this.cmbAsignado.Size = new System.Drawing.Size(467, 24);
+            this.cmbAsignado.Size = new System.Drawing.Size(351, 21);
             this.cmbAsignado.TabIndex = 18;
             // 
             // cmbEstatus
@@ -273,21 +248,19 @@
             this.cmbEstatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbEstatus.FormattingEnabled = true;
-            this.cmbEstatus.Location = new System.Drawing.Point(156, 383);
-            this.cmbEstatus.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbEstatus.Location = new System.Drawing.Point(117, 311);
             this.cmbEstatus.Name = "cmbEstatus";
-            this.cmbEstatus.Size = new System.Drawing.Size(467, 24);
+            this.cmbEstatus.Size = new System.Drawing.Size(351, 21);
             this.cmbEstatus.TabIndex = 19;
             // 
             // txtComentario
             // 
             this.txtComentario.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtComentario.Location = new System.Drawing.Point(156, 428);
-            this.txtComentario.Margin = new System.Windows.Forms.Padding(4);
+            this.txtComentario.Location = new System.Drawing.Point(117, 348);
             this.txtComentario.Multiline = true;
             this.txtComentario.Name = "txtComentario";
-            this.txtComentario.Size = new System.Drawing.Size(467, 86);
+            this.txtComentario.Size = new System.Drawing.Size(351, 71);
             this.txtComentario.TabIndex = 20;
             // 
             // groupBox1
@@ -311,7 +284,6 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.cmbMoneda);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.cmbEmpleado);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.cmbCliente);
             this.groupBox1.Controls.Add(this.label7);
@@ -322,23 +294,41 @@
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.checkBox1);
-            this.groupBox1.Location = new System.Drawing.Point(16, 107);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Location = new System.Drawing.Point(12, 87);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(649, 591);
+            this.groupBox1.Size = new System.Drawing.Size(487, 482);
             this.groupBox1.TabIndex = 21;
             this.groupBox1.TabStop = false;
+            // 
+            // chkpago
+            // 
+            this.chkpago.AutoSize = true;
+            this.chkpago.Location = new System.Drawing.Point(223, 159);
+            this.chkpago.Name = "chkpago";
+            this.chkpago.Size = new System.Drawing.Size(99, 17);
+            this.chkpago.TabIndex = 26;
+            this.chkpago.Text = "Pago inmediato";
+            this.chkpago.UseVisualStyleBackColor = true;
+            this.chkpago.CheckedChanged += new System.EventHandler(this.chkpago_CheckedChanged);
+            // 
+            // chkCaja
+            // 
+            this.chkCaja.AutoSize = true;
+            this.chkCaja.Location = new System.Drawing.Point(124, 159);
+            this.chkCaja.Name = "chkCaja";
+            this.chkCaja.Size = new System.Drawing.Size(77, 17);
+            this.chkCaja.TabIndex = 25;
+            this.chkCaja.Text = "Caja Chica";
+            this.chkCaja.UseVisualStyleBackColor = true;
             // 
             // btnCrear
             // 
             this.btnCrear.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCrear.BackColor = System.Drawing.Color.Lavender;
-            this.btnCrear.Location = new System.Drawing.Point(230, 542);
-            this.btnCrear.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCrear.Location = new System.Drawing.Point(172, 440);
             this.btnCrear.Name = "btnCrear";
-            this.btnCrear.Size = new System.Drawing.Size(216, 28);
+            this.btnCrear.Size = new System.Drawing.Size(162, 23);
             this.btnCrear.TabIndex = 24;
             this.btnCrear.Text = "Crear Payment";
             this.btnCrear.UseVisualStyleBackColor = false;
@@ -348,18 +338,16 @@
             // 
             this.txtNombre.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNombre.Location = new System.Drawing.Point(297, 122);
-            this.txtNombre.Margin = new System.Windows.Forms.Padding(4);
+            this.txtNombre.Location = new System.Drawing.Point(223, 99);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(325, 20);
+            this.txtNombre.Size = new System.Drawing.Size(245, 20);
             this.txtNombre.TabIndex = 23;
             // 
             // txtNumeroNomina
             // 
-            this.txtNumeroNomina.Location = new System.Drawing.Point(156, 122);
-            this.txtNumeroNomina.Margin = new System.Windows.Forms.Padding(4);
+            this.txtNumeroNomina.Location = new System.Drawing.Point(117, 99);
             this.txtNumeroNomina.Name = "txtNumeroNomina";
-            this.txtNumeroNomina.Size = new System.Drawing.Size(117, 20);
+            this.txtNumeroNomina.Size = new System.Drawing.Size(89, 20);
             this.txtNumeroNomina.TabIndex = 22;
             // 
             // dtFechaPayment
@@ -370,16 +358,20 @@
             this.dtFechaPayment.CustomFormat = "dd-MM-yyyy";
             this.dtFechaPayment.Enabled = false;
             this.dtFechaPayment.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtFechaPayment.Location = new System.Drawing.Point(156, 257);
-            this.dtFechaPayment.Margin = new System.Windows.Forms.Padding(4);
+            this.dtFechaPayment.Location = new System.Drawing.Point(117, 209);
             this.dtFechaPayment.Name = "dtFechaPayment";
-            this.dtFechaPayment.Size = new System.Drawing.Size(467, 20);
+            this.dtFechaPayment.Size = new System.Drawing.Size(351, 20);
             this.dtFechaPayment.TabIndex = 21;
             // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.label17);
+            this.groupBox2.Controls.Add(this.label16);
+            this.groupBox2.Controls.Add(this.label14);
+            this.groupBox2.Controls.Add(this.label15);
+            this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.btnLimpiar);
             this.groupBox2.Controls.Add(this.btnB2b);
             this.groupBox2.Controls.Add(this.btnPayment);
@@ -391,21 +383,63 @@
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.txtMonto);
             this.groupBox2.Controls.Add(this.cmbCcostos);
-            this.groupBox2.Location = new System.Drawing.Point(665, 15);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Location = new System.Drawing.Point(499, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(612, 683);
+            this.groupBox2.Size = new System.Drawing.Size(459, 555);
             this.groupBox2.TabIndex = 22;
             this.groupBox2.TabStop = false;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(276, 522);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(41, 13);
+            this.label17.TabIndex = 37;
+            this.label17.Text = "label17";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(276, 443);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(41, 13);
+            this.label16.TabIndex = 36;
+            this.label16.Text = "label16";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(276, 418);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(41, 13);
+            this.label14.TabIndex = 35;
+            this.label14.Text = "label14";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(53, 522);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(41, 13);
+            this.label15.TabIndex = 34;
+            this.label15.Text = "label15";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(53, 418);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(41, 13);
+            this.label11.TabIndex = 32;
+            this.label11.Text = "label11";
             // 
             // btnLimpiar
             // 
             this.btnLimpiar.BackColor = System.Drawing.Color.Lavender;
-            this.btnLimpiar.Location = new System.Drawing.Point(376, 143);
-            this.btnLimpiar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnLimpiar.Location = new System.Drawing.Point(282, 116);
             this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(163, 28);
+            this.btnLimpiar.Size = new System.Drawing.Size(122, 23);
             this.btnLimpiar.TabIndex = 27;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = false;
@@ -414,10 +448,9 @@
             // btnB2b
             // 
             this.btnB2b.BackColor = System.Drawing.Color.Lavender;
-            this.btnB2b.Location = new System.Drawing.Point(376, 634);
-            this.btnB2b.Margin = new System.Windows.Forms.Padding(4);
+            this.btnB2b.Location = new System.Drawing.Point(262, 481);
             this.btnB2b.Name = "btnB2b";
-            this.btnB2b.Size = new System.Drawing.Size(163, 28);
+            this.btnB2b.Size = new System.Drawing.Size(122, 23);
             this.btnB2b.TabIndex = 26;
             this.btnB2b.Text = "4. B2B";
             this.btnB2b.UseVisualStyleBackColor = false;
@@ -426,10 +459,9 @@
             // btnPayment
             // 
             this.btnPayment.BackColor = System.Drawing.Color.Lavender;
-            this.btnPayment.Location = new System.Drawing.Point(79, 634);
-            this.btnPayment.Margin = new System.Windows.Forms.Padding(4);
+            this.btnPayment.Location = new System.Drawing.Point(42, 481);
             this.btnPayment.Name = "btnPayment";
-            this.btnPayment.Size = new System.Drawing.Size(163, 28);
+            this.btnPayment.Size = new System.Drawing.Size(122, 23);
             this.btnPayment.TabIndex = 25;
             this.btnPayment.Text = "2. Payment";
             this.btnPayment.UseVisualStyleBackColor = false;
@@ -443,10 +475,9 @@
             this.colMonto,
             this.ColMoneda});
             this.lstCC.HideSelection = false;
-            this.lstCC.Location = new System.Drawing.Point(8, 178);
-            this.lstCC.Margin = new System.Windows.Forms.Padding(4);
+            this.lstCC.Location = new System.Drawing.Point(6, 145);
             this.lstCC.Name = "lstCC";
-            this.lstCC.Size = new System.Drawing.Size(595, 415);
+            this.lstCC.Size = new System.Drawing.Size(447, 225);
             this.lstCC.TabIndex = 5;
             this.lstCC.UseCompatibleStateImageBehavior = false;
             this.lstCC.View = System.Windows.Forms.View.Details;
@@ -475,22 +506,20 @@
             // btnInv
             // 
             this.btnInv.BackColor = System.Drawing.Color.Lavender;
-            this.btnInv.Location = new System.Drawing.Point(376, 602);
-            this.btnInv.Margin = new System.Windows.Forms.Padding(4);
+            this.btnInv.Location = new System.Drawing.Point(262, 377);
             this.btnInv.Name = "btnInv";
-            this.btnInv.Size = new System.Drawing.Size(163, 28);
+            this.btnInv.Size = new System.Drawing.Size(122, 23);
             this.btnInv.TabIndex = 24;
-            this.btnInv.Text = "3. Invoice";
+            this.btnInv.Text = "3. Factura (pdf, xml)";
             this.btnInv.UseVisualStyleBackColor = false;
             this.btnInv.Click += new System.EventHandler(this.btnInv_Click);
             // 
             // btnFa
             // 
             this.btnFa.BackColor = System.Drawing.Color.Lavender;
-            this.btnFa.Location = new System.Drawing.Point(79, 602);
-            this.btnFa.Margin = new System.Windows.Forms.Padding(4);
+            this.btnFa.Location = new System.Drawing.Point(42, 377);
             this.btnFa.Name = "btnFa";
-            this.btnFa.Size = new System.Drawing.Size(163, 28);
+            this.btnFa.Size = new System.Drawing.Size(122, 23);
             this.btnFa.TabIndex = 6;
             this.btnFa.Text = "1. FA";
             this.btnFa.UseVisualStyleBackColor = false;
@@ -499,10 +528,9 @@
             // btnAgregarCC
             // 
             this.btnAgregarCC.BackColor = System.Drawing.Color.Lavender;
-            this.btnAgregarCC.Location = new System.Drawing.Point(159, 143);
-            this.btnAgregarCC.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAgregarCC.Location = new System.Drawing.Point(119, 116);
             this.btnAgregarCC.Name = "btnAgregarCC";
-            this.btnAgregarCC.Size = new System.Drawing.Size(163, 28);
+            this.btnAgregarCC.Size = new System.Drawing.Size(122, 23);
             this.btnAgregarCC.TabIndex = 4;
             this.btnAgregarCC.Text = "Agregar";
             this.btnAgregarCC.UseVisualStyleBackColor = false;
@@ -511,29 +539,26 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(29, 81);
-            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label13.Location = new System.Drawing.Point(22, 66);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(42, 15);
+            this.label13.Size = new System.Drawing.Size(37, 13);
             this.label13.TabIndex = 3;
             this.label13.Text = "Monto";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(29, 36);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Location = new System.Drawing.Point(22, 29);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(98, 15);
+            this.label12.Size = new System.Drawing.Size(87, 13);
             this.label12.TabIndex = 2;
             this.label12.Text = "Centro de costos";
             // 
             // txtMonto
             // 
-            this.txtMonto.Location = new System.Drawing.Point(220, 78);
-            this.txtMonto.Margin = new System.Windows.Forms.Padding(4);
+            this.txtMonto.Location = new System.Drawing.Point(165, 63);
             this.txtMonto.Name = "txtMonto";
-            this.txtMonto.Size = new System.Drawing.Size(249, 20);
+            this.txtMonto.Size = new System.Drawing.Size(188, 20);
             this.txtMonto.TabIndex = 1;
             this.txtMonto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtMonto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMonto_KeyPress);
@@ -541,10 +566,9 @@
             // cmbCcostos
             // 
             this.cmbCcostos.FormattingEnabled = true;
-            this.cmbCcostos.Location = new System.Drawing.Point(220, 32);
-            this.cmbCcostos.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbCcostos.Location = new System.Drawing.Point(165, 26);
             this.cmbCcostos.Name = "cmbCcostos";
-            this.cmbCcostos.Size = new System.Drawing.Size(249, 24);
+            this.cmbCcostos.Size = new System.Drawing.Size(188, 21);
             this.cmbCcostos.TabIndex = 0;
             this.cmbCcostos.SelectedIndexChanged += new System.EventHandler(this.cmbCcostos_SelectedIndexChanged);
             // 
@@ -555,49 +579,24 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::PaymentD.Properties.Resources.oficial;
-            this.pictureBox1.Location = new System.Drawing.Point(16, 15);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(641, 85);
+            this.pictureBox1.Size = new System.Drawing.Size(481, 69);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 23;
             this.pictureBox1.TabStop = false;
             // 
-            // chkCaja
-            // 
-            this.chkCaja.AutoSize = true;
-            this.chkCaja.Location = new System.Drawing.Point(165, 196);
-            this.chkCaja.Margin = new System.Windows.Forms.Padding(4);
-            this.chkCaja.Name = "chkCaja";
-            this.chkCaja.Size = new System.Drawing.Size(88, 19);
-            this.chkCaja.TabIndex = 25;
-            this.chkCaja.Text = "Caja Chica";
-            this.chkCaja.UseVisualStyleBackColor = true;
-            // 
-            // chkpago
-            // 
-            this.chkpago.AutoSize = true;
-            this.chkpago.Location = new System.Drawing.Point(297, 196);
-            this.chkpago.Margin = new System.Windows.Forms.Padding(4);
-            this.chkpago.Name = "chkpago";
-            this.chkpago.Size = new System.Drawing.Size(116, 19);
-            this.chkpago.TabIndex = 26;
-            this.chkpago.Text = "Pago inmediato";
-            this.chkpago.UseVisualStyleBackColor = true;
-            this.chkpago.CheckedChanged += new System.EventHandler(this.chkpago_CheckedChanged);
-            // 
             // frmPaymentCaptura
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.LightCyan;
-            this.ClientSize = new System.Drawing.Size(1293, 708);
+            this.ClientSize = new System.Drawing.Size(970, 575);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "frmPaymentCaptura";
             this.Text = "Captura de Payment";
@@ -629,7 +628,6 @@
         private System.Windows.Forms.ComboBox cmbArea;
         private System.Windows.Forms.ComboBox cmbMpago;
         private System.Windows.Forms.ComboBox cmbCliente;
-        private System.Windows.Forms.ComboBox cmbEmpleado;
         private System.Windows.Forms.ComboBox cmbMoneda;
         private System.Windows.Forms.ComboBox cmbAsignado;
         private System.Windows.Forms.ComboBox cmbEstatus;
@@ -659,5 +657,10 @@
         private System.Windows.Forms.ColumnHeader ColMoneda;
         private System.Windows.Forms.CheckBox chkpago;
         private System.Windows.Forms.CheckBox chkCaja;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label11;
     }
 }

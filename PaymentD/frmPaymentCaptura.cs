@@ -22,29 +22,76 @@ namespace PaymentD
         byte[] _streamFA, _streamP, _streamInvpdf, _streamxml, _streamb2b;
         string _nameFA, _nameP, _nameInvpdf, _nameInvxml, _nameb2b;
         string _extFA, _extP, _extnvpdf, _extInvxml, _extb2b;
+        bool PaymentU = false;
 
-        private void cmbEmpleado_SelectedIndexChanged(object sender, EventArgs e)
+        public frmPaymentCaptura(int NNomina, string Usuario, string NomCompleto)
         {
-            if (cmbEmpleado.GetItemText(cmbEmpleado.SelectedItem) == "Kazunari Miyazaki")
-            {
-                chkCaja.Visible = true;
-            }
-            else
-            { chkCaja.Visible = false;
-              chkCaja.Checked = false;
-            }
+            InitializeComponent();
+            Proc.combos(cmbArea, 1);
+            Proc.combos(cmbMpago, 5);
+            Proc.combos(cmbMoneda, 3);
+            Proc.combos(cmbEstatus, 2);
+            Proc.combos(cmbCliente, 7);
+            Proc.combos(cmbAsignado, 8);
           
+            Proc.combos(cmbCcostos, 4);
+            cmbArea.SelectedValue = 1;
+            cmbMpago.SelectedValue = 1;
+            cmbMoneda.SelectedValue = 1;
+            cmbCliente.SelectedValue = 1;
+            cmbAsignado.SelectedValue = 0;
+         
+            cmbCcostos.SelectedValue = 1;
+            checkBox1.Checked = true;
+            checkBox1.Enabled = false;
+            cmbCliente.Visible = true;
+            label10.Visible = true;
+            cmbEstatus.Enabled = false;
+            _nnomina = NNomina;
+            _usuario = Usuario;
+            _nomcompleto = NomCompleto;
+            lstCC.Columns[0].Width = 0;
+            chkCaja.Visible = false;
+            chkpago.Visible = false;
+            label11.Visible = false;
+            label14.Visible = false;
+            label15.Visible = false;
+            label16.Visible = false;
+            label17.Visible = false;
         }
+
+        private void frmPaymentCaptura_Load(object sender, EventArgs e)
+        {
+
+            Proc.Determinarfecha(dtFechaPayment);
+            txtNumeroNomina.Text = _nnomina.ToString();
+            txtNumeroNomina.Enabled = false;
+            txtNombre.Text = _nomcompleto;
+            txtNombre.Enabled = false;
+        }
+       
 
         private void cmbCliente_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbCliente.GetItemText(cmbCliente.SelectedItem) == "ANTICIPO PCR" || cmbCliente.GetItemText(cmbCliente.SelectedItem) == "SI VALE MEXICO SA DE CV")
+            if (cmbCliente.GetItemText(cmbCliente.SelectedItem) == "PROVEEDORES VARIOS")
+            { chkCaja.Visible = true; }
+            else { chkCaja.Visible = false; chkCaja.Checked = false; }
+
+            if (cmbCliente.GetItemText(cmbCliente.SelectedItem) == "PROVEEDORES VARIOS" || cmbCliente.GetItemText(cmbCliente.SelectedItem) == "ANTICIPO PCR" || cmbCliente.GetItemText(cmbCliente.SelectedItem) == "SI VALE MEXICO SA DE CV" )
             {
                 chkpago.Visible = true;
             }
             else
-            { chkpago.Visible = false;
-              chkpago.Checked = false;
+            {
+                chkpago.Visible = false;
+                chkpago.Checked = false;
+                
+            }
+
+            if (cmbCliente.GetItemText(cmbCliente.SelectedItem) == "PROVEEDORES VARIOS" || cmbCliente.GetItemText(cmbCliente.SelectedItem) == "SECRETARIA DE HACIENDA Y CREDITO PUBLICO" || cmbCliente.GetItemText(cmbCliente.SelectedItem) == "SECRETARIA DE FINANZAS, INVERSION Y ADMINISTRACION")
+            {
+                PaymentU = true;
+               
             }
         }
 
@@ -97,59 +144,18 @@ namespace PaymentD
         }
 
     
-        public frmPaymentCaptura(int NNomina,string Usuario, string NomCompleto)
-        {
-            InitializeComponent();
-            Proc.combos(cmbArea, 1);
-            Proc.combos(cmbMpago, 5);
-            Proc.combos(cmbMoneda, 3);
-            Proc.combos(cmbEstatus, 2);
-            Proc.combos(cmbCliente, 7);
-            Proc.combos(cmbAsignado, 8);
-            Proc.combos(cmbEmpleado, 6);
-            Proc.combos(cmbCcostos, 4);
-            cmbArea.SelectedValue = 1;
-            cmbMpago.SelectedValue = 1;
-            cmbMoneda.SelectedValue = 1;
-            cmbCliente.SelectedValue = 1;
-            cmbAsignado.SelectedValue = 0;
-            cmbEmpleado.SelectedValue = 0;
-            cmbCcostos.SelectedValue = 1;
-
-            cmbCliente.Visible = false;
-            label10.Visible = true;
-            cmbEstatus.Enabled = false;
-            _nnomina = NNomina;
-            _usuario = Usuario;
-            _nomcompleto = NomCompleto;
-            lstCC.Columns[0].Width = 0;
-            chkCaja.Visible = false;
-            chkpago.Visible = false;
-
-
-        }
-
-        private void frmPaymentCaptura_Load(object sender, EventArgs e)
-        {
-
-            Proc.Determinarfecha(dtFechaPayment);
-            txtNumeroNomina.Text = _nnomina.ToString();
-            txtNumeroNomina.Enabled = false;
-            txtNombre.Text = _nomcompleto;
-            txtNombre.Enabled = false;
-        }
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox1.Checked)
             {
-                cmbEmpleado.Visible = false;
+               
                
                 cmbCliente.Visible = true;
                 label10.Visible = true;
             }
             else
             {
-                cmbEmpleado.Visible = true;
+               
               
                 cmbCliente.Visible = false;
                 label10.Visible = true;
@@ -158,7 +164,7 @@ namespace PaymentD
         }
         private void button5_Click(object sender, EventArgs e)
         {
-            int cmbClientea, cmbempleado;
+            int cmbClientea=0, cmbempleado,onlypay=0;
             bool check=false;
 
             if (string.IsNullOrWhiteSpace(txtPorpuse.Text) || string.IsNullOrEmpty(txtPorpuse.Text))
@@ -188,18 +194,7 @@ namespace PaymentD
                 cmbClientea = int.Parse(cmbCliente.SelectedValue.ToString());
                 cmbempleado = 0;
             }
-            else
-            {
-                
-                if (cmbEmpleado.SelectedIndex == -1 || cmbEmpleado.Text == "")
-                {
-                    MessageBox.Show("Favor de Capturar el empleado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    
-                    return;
-                }
-                cmbempleado = int.Parse(cmbEmpleado.SelectedValue.ToString());
-                cmbClientea = 0;
-            }
+        
             
 
 
@@ -229,44 +224,69 @@ namespace PaymentD
 
             }
 
-            if (string.IsNullOrWhiteSpace(_nameFA))
-            {
-                MessageBox.Show("Favor de cargar el formato de aprobación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(_nameP))
-            {
-                MessageBox.Show("Favor de cargar el formato de Payment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
 
-
-            if (chkCaja.Checked == true || cmbMpago.GetItemText(cmbMpago.SelectedItem)== "Transferencia Internacional")
+            if (PaymentU == false)
             {
-                if (string.IsNullOrWhiteSpace(_nameInvpdf))
+                if (string.IsNullOrWhiteSpace(_nameFA))
                 {
-                    MessageBox.Show("Favor de cargar el formato de factura pdf", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Favor de cargar el formato de aprobación", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+                if (string.IsNullOrWhiteSpace(_nameP))
+                {
+                    MessageBox.Show("Favor de cargar el formato de Payment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+
+                if (chkCaja.Checked == true || cmbMpago.GetItemText(cmbMpago.SelectedItem) == "Transferencia Internacional")
+                {
+                    if (string.IsNullOrWhiteSpace(_nameInvpdf))
+                    {
+                        MessageBox.Show("Favor de cargar el formato de factura pdf", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+                else
+                {
+                    if (string.IsNullOrWhiteSpace(_nameInvpdf) || string.IsNullOrWhiteSpace(_nameInvxml))
+                    {
+                        MessageBox.Show("Favor de cargar el formato de factura", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+
             }
             else
             {
-                if (string.IsNullOrWhiteSpace(_nameInvpdf) || string.IsNullOrWhiteSpace(_nameInvxml))
+                onlypay = 1;
+                if (string.IsNullOrWhiteSpace(_nameP))
                 {
-                    MessageBox.Show("Favor de cargar el formato de factura", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    MessageBox.Show("Favor de cargar el formato de Payment", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;                
                 }
+
             }
+
+
 
            if (checkBox1.Checked)
             {
                 check = true;
             }
+          
 
-
-
-            Proc.GeneraPayment(check, lstCC, txtPorpuse.Text, int.Parse(cmbArea.SelectedValue.ToString()),dtFechaPayment.Value, int.Parse(cmbAsignado.SelectedValue.ToString()), cmbClientea, int.Parse(cmbMpago.SelectedValue.ToString()), int.Parse(cmbMoneda.SelectedValue.ToString()),_usuario, int.Parse(cmbEstatus.SelectedValue.ToString()), txtComentario.Text, cmbempleado, _nnomina, _streamFA,_streamP, _streamInvpdf, _streamxml, _streamb2b, name, ext) ;
-
+            Proc.GeneraPayment(check,onlypay, lstCC, txtPorpuse.Text, int.Parse(cmbArea.SelectedValue.ToString()),dtFechaPayment.Value, int.Parse(cmbAsignado.SelectedValue.ToString()), cmbClientea,  int.Parse(cmbMpago.SelectedValue.ToString()), int.Parse(cmbMoneda.SelectedValue.ToString()),_usuario, int.Parse(cmbEstatus.SelectedValue.ToString()), txtComentario.Text,  _nnomina, _streamFA,_streamP, _streamInvpdf, _streamxml, _streamb2b, name, ext) ;
+            txtPorpuse.Text = string.Empty;
+            txtComentario.Text = string.Empty; 
+            txtMonto.Text = string.Empty;
+            cmbAsignado.Text = string.Empty;
+            btnLimpiar.PerformClick();
+            label11.Visible = false;
+            label14.Visible = false;
+            label15.Visible = false;
+            label16.Visible = false;
+            label17.Visible = false;
 
 
 
@@ -360,7 +380,7 @@ namespace PaymentD
             string _nomdocument, _extdocumento, _tipoDocuemnto,path;
             
             openFileDialog1.InitialDirectory = "c:\\";
-            openFileDialog1.Filter = "Todos los archivos (*.*)|*.*";
+            openFileDialog1.Filter = "(*.pdf)|*.pdf";
             openFileDialog1.FilterIndex = 1;
          
            
@@ -380,6 +400,8 @@ namespace PaymentD
                 _extFA = Path.GetExtension(openFileDialog1.FileName);
                 name[0] = _nameFA;
                 ext[0] = _extFA;
+                label11.Visible = true;
+                label11.Text = _nameFA;
             }
            
 
@@ -389,7 +411,7 @@ namespace PaymentD
             string _nomdocument, _extdocumento, _tipoDocuemnto, path;
 
             openFileDialog1.InitialDirectory = "c:\\";
-            openFileDialog1.Filter = "Todos los archivos (*.*)|*.*";
+            openFileDialog1.Filter = "(*.pdf)|*.pdf";
             openFileDialog1.FilterIndex = 1;
             
 
@@ -409,6 +431,9 @@ namespace PaymentD
                 _extb2b = Path.GetExtension(openFileDialog1.FileName);
                 name[4] = _nameb2b;
                 ext[4] = _extb2b;
+                label17.Visible = true;
+                label17.Text = _nameb2b;
+
             }
            
         }
@@ -418,7 +443,7 @@ namespace PaymentD
             string _nomdocument, _extdocumento, _tipoDocuemnto, path;
 
             openFileDialog1.InitialDirectory = "c:\\";
-            openFileDialog1.Filter = "Todos los archivos (*.*)|*.*";
+            openFileDialog1.Filter = "(*.pdf)|*.pdf|(*.xml)|*.xml";
             openFileDialog1.FilterIndex = 1;
    
 
@@ -450,13 +475,16 @@ namespace PaymentD
                     case ".pdf":
                         _nameInvpdf = Path.GetFileName(openFileDialog1.FileName);
                         _extnvpdf = Path.GetExtension(openFileDialog1.FileName);
-
+                        label14.Visible = true;
+                        label14.Text = _nameInvpdf;
                         name[2] = _nameInvpdf;
                         ext[2] = _extnvpdf;
                         break;
                     case ".xml":
                         _nameInvxml = Path.GetFileName(openFileDialog1.FileName);
                         _extInvxml = Path.GetExtension(openFileDialog1.FileName);
+                        label16.Visible = true;
+                        label16.Text = _nameInvxml;
                         name[3] = _nameInvxml;
                         ext[3] = _extInvxml;
                         break;
@@ -472,7 +500,7 @@ namespace PaymentD
             string _nomdocument, _extdocumento, _tipoDocuemnto, path;
 
             openFileDialog1.InitialDirectory = "c:\\";
-            openFileDialog1.Filter = "Todos los archivos (*.*)|*.*";
+            openFileDialog1.Filter = "(*.pdf)|*.pdf";
             openFileDialog1.FilterIndex = 1;
    
 
@@ -491,6 +519,8 @@ namespace PaymentD
                 _extP = Path.GetExtension(openFileDialog1.FileName);
                 name[1] = _nameP;
                 ext[1] = _extP;
+                label15.Visible = true;
+                label15.Text = _nameP;
             }
 
            

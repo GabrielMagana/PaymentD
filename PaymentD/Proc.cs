@@ -216,8 +216,8 @@ namespace PaymentD
 
 
         }
-        public static void GeneraPayment(bool check,ListView Lcc, string porpuse, int cmbArea,DateTime fechaPago, int cmbEmpleadoAsig,int cmbCliente,int cmbTipoPago,
-            int cmbMoneda,string usuario,int cmbEstatus,string Comentarios,int cmbEmpleado,int Nomina, byte[] FA, byte[] P, byte[] ipdf, byte[] ixml,byte[] b2b, string[] Name, string[] ext)
+        public static void GeneraPayment(bool check,int onlypayment,ListView Lcc, string porpuse, int cmbArea,DateTime fechaPago, int cmbEmpleadoAsig,int cmbCliente,int cmbTipoPago,
+            int cmbMoneda,string usuario,int cmbEstatus,string Comentarios,int Nomina, byte[] FA, byte[] P, byte[] ipdf, byte[] ixml,byte[] b2b, string[] Name, string[] ext)
         {
             DataTable dt = new DataTable();
             int idpayment, tipod= 0;
@@ -226,7 +226,7 @@ namespace PaymentD
 
             if(check == false)
             { cmbCliente = 0; }
-            else { cmbEmpleado = 0; }
+        
 
 
 
@@ -260,7 +260,6 @@ namespace PaymentD
                     cmd.Parameters.AddWithValue("@Usuario", usuario);
                     cmd.Parameters.AddWithValue("@ClaEstatus", cmbEstatus);
                     cmd.Parameters.AddWithValue("@comentarios", Comentarios);
-                    cmd.Parameters.AddWithValue("@idEmpleado", cmbEmpleado);
                     cmd.Parameters.AddWithValue("@Nomina", Nomina);
 
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -290,6 +289,7 @@ namespace PaymentD
 
 
 
+
                     for(int i= 0; i<4;i++)
                     {
                         switch(i)
@@ -316,12 +316,15 @@ namespace PaymentD
                                 break;
                         }
 
-                        if (string.IsNullOrEmpty(Name.GetValue(i).ToString()) || string.IsNullOrWhiteSpace(Name.GetValue(i).ToString())) 
+                        
+                        if ((onlypayment ==1 && ipdf ==null) || (onlypayment == 1 && ixml == null) || (onlypayment == 1 && b2b == null) || (onlypayment == 1 && FA == null))
+                        { goto Salir; }
+                            if (string.IsNullOrEmpty(Name.GetValue(i).ToString()) || string.IsNullOrWhiteSpace(Name.GetValue(i).ToString()))
                             {
-                            goto Salir;
-                                
-                            }
+                                goto Salir;
 
+                            }
+                        
 
                         cmd.CommandText ="dbo.PaymentDetalleDocumentos";
                         cmd.CommandType = CommandType.StoredProcedure; 
@@ -353,6 +356,7 @@ namespace PaymentD
                     MessageBox.Show(e.Message);
                     transaction.Rollback();
                     MessageBox.Show("Payment no se genero, favor de contactar al administrador");
+                    return;
                 }
 
 

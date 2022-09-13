@@ -77,9 +77,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(17, 93);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 13);
+            this.label2.Size = new System.Drawing.Size(61, 13);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Password";
+            this.label2.Text = "Contraseña";
             // 
             // label1
             // 
@@ -127,7 +127,7 @@
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
             this.Name = "fmrLogin";
-            this.Text = "Loggin Payment";
+            this.Text = "Login Payment";
             this.Load += new System.EventHandler(this.fmrLogin_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
