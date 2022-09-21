@@ -13,21 +13,22 @@ namespace PaymentD
     public partial class frmprincipal : Form
     {
 
-        string _usuario, _nombre;
+        string _usuario, _nombre, _correo;
         int _tipo,_nomina;
-        public frmprincipal(string Usuario,string Nombre,int Nomina,int tipo)
+        public frmprincipal(string Usuario,string Nombre,int Nomina,int tipo,string correo)
         {
             InitializeComponent();
             _usuario = Usuario;
             _nombre = Nombre;
             _tipo = tipo;
             _nomina = Nomina;
+            _correo = correo;
 
         }
 
         private void consultarPaymentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmConsultaCaptura fr = new frmConsultaCaptura(_tipo,_nomina);
+            frmConsultaCaptura fr = new frmConsultaCaptura(_tipo,_nomina,_correo);
             fr.Show();
         }
 
@@ -96,7 +97,7 @@ namespace PaymentD
 
         private void newPaymentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmPaymentCaptura fr = new frmPaymentCaptura(_nomina,_usuario,_nombre);
+            frmPaymentCaptura fr = new frmPaymentCaptura(_nomina,_usuario,_nombre, _correo);
             fr.Show();
 
         }

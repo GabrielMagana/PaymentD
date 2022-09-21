@@ -320,6 +320,7 @@
             this.chkCaja.TabIndex = 25;
             this.chkCaja.Text = "Caja Chica";
             this.chkCaja.UseVisualStyleBackColor = true;
+            this.chkCaja.CheckedChanged += new System.EventHandler(this.chkCaja_CheckedChanged);
             // 
             // btnCrear
             // 

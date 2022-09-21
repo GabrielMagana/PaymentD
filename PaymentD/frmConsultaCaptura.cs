@@ -22,8 +22,8 @@ namespace PaymentD
         private BindingSource bindingSourceDD = new BindingSource();
         public static string ConnectionString = ConfigurationManager.AppSettings["ConexionDB"];
         int _usuario, _tipoUsuario, Idpayment,ClaEstatusPerm;
-        string usuariot;
-        public frmConsultaCaptura( int TipoUsuario, int Usuario)
+        string usuariot,_correo;
+        public frmConsultaCaptura( int TipoUsuario, int Usuario,string correo)
         {
             InitializeComponent();
             _usuario = Usuario;
@@ -212,7 +212,7 @@ namespace PaymentD
            
 
 
-            Proc.ActualizarPayment(usuariot, Idpayment, txtComentario.Text, int.Parse(cmbEstatus.SelectedValue.ToString()), int.Parse(cmbMoneda.SelectedValue.ToString()), int.Parse(cmbAsignado.SelectedValue.ToString()),txtPorpuse.Text);
+            Proc.ActualizarPayment(usuariot, Idpayment, txtComentario.Text, int.Parse(cmbEstatus.SelectedValue.ToString()), int.Parse(cmbMoneda.SelectedValue.ToString()), int.Parse(cmbAsignado.SelectedValue.ToString()),txtPorpuse.Text,_correo);
             llenarleer(Idpayment);
             llenarDetalle(Idpayment);
 

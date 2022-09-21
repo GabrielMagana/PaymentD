@@ -33,7 +33,7 @@ namespace PaymentD
                 SqlCommand cmd = new SqlCommand("dbo.combos", conn1);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@opcion", opcion);
+                cmd.Parameters.AddWithValue("@opcion", opcion); 
 
                 SqlDataAdapter Lector = new SqlDataAdapter(cmd);
                 Lector.Fill(dt);
@@ -157,7 +157,7 @@ namespace PaymentD
 
             }
         }
-        public static void ActualizarPayment(string usuario,int payment,string comentarios,int estatus,int moneda, int empleado,string porpuse)
+        public static void ActualizarPayment(string usuario,int payment,string comentarios,int estatus,int moneda, int empleado,string porpuse,string usuarioCorreo)
         {
             int tipocorreo=0;
             using (SqlConnection conn1 = new SqlConnection(ConnectionString))
@@ -179,7 +179,6 @@ namespace PaymentD
 
                     cmd.CommandText = "dbo.ActualizarPaymentU";
                 cmd.CommandType = CommandType.StoredProcedure;
-
                 cmd.Parameters.AddWithValue("@idPayment", payment);
                 cmd.Parameters.AddWithValue("@comentarios", comentarios);
                 cmd.Parameters.AddWithValue("@estatus", estatus);
@@ -203,7 +202,7 @@ namespace PaymentD
                             tipocorreo = 3;
                             break;
                     }
-                 enviocorreo(tipocorreo, usuario + "@mazdalogi.mx", porpuse, comentarios);
+                 enviocorreo(tipocorreo, usuarioCorreo, porpuse, comentarios);
 
                 }
                 catch (Exception e)
@@ -217,7 +216,7 @@ namespace PaymentD
 
         }
         public static void GeneraPayment(bool check,int onlypayment,ListView Lcc, string porpuse, int cmbArea,DateTime fechaPago, int cmbEmpleadoAsig,int cmbCliente,int cmbTipoPago,
-            int cmbMoneda,string usuario,int cmbEstatus,string Comentarios,int Nomina, byte[] FA, byte[] P, byte[] ipdf, byte[] ixml,byte[] b2b, string[] Name, string[] ext)
+            int cmbMoneda,string usuario,int cmbEstatus,string Comentarios,int Nomina, byte[] FA, byte[] P, byte[] ipdf, byte[] ixml,byte[] b2b, string[] Name, string[] ext,string usuarioCorreo,int caja, int pagoinm)
         {
             DataTable dt = new DataTable();
             int idpayment, tipod= 0;
@@ -261,6 +260,8 @@ namespace PaymentD
                     cmd.Parameters.AddWithValue("@ClaEstatus", cmbEstatus);
                     cmd.Parameters.AddWithValue("@comentarios", Comentarios);
                     cmd.Parameters.AddWithValue("@Nomina", Nomina);
+                    cmd.Parameters.AddWithValue("@esCaja", caja);
+                    cmd.Parameters.AddWithValue("@esPagoinme", pagoinm);
 
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     da.Fill(dt);
@@ -317,8 +318,11 @@ namespace PaymentD
                         }
 
                         
-                        if ((onlypayment ==1 && ipdf ==null) || (onlypayment == 1 && ixml == null) || (onlypayment == 1 && b2b == null) || (onlypayment == 1 && FA == null))
-                        { goto Salir; }
+                        if ((onlypayment ==1 && opcion == null) )
+                        { 
+                            goto Salir; 
+                        }
+                        
                             if (string.IsNullOrEmpty(Name.GetValue(i).ToString()) || string.IsNullOrWhiteSpace(Name.GetValue(i).ToString()))
                             {
                                 goto Salir;
@@ -336,20 +340,15 @@ namespace PaymentD
                         cmd.Parameters.AddWithValue("@ext", ext.GetValue(i).ToString() );
                         cmd.ExecuteNonQuery();
 
-
+                        Salir:;
                     }
 
-
-
-
-
-
-                    Salir:
+                   
                     transaction.Commit();
                     
                 
                     MessageBox.Show ("Payment Generado correctamente");
-                    enviocorreo(1, usuario + "@mazdalogi.mx", porpuse,"");
+                    enviocorreo(1, usuarioCorreo, porpuse,"");
                 }
                 catch(Exception e)
                 {
@@ -625,9 +624,11 @@ namespace PaymentD
 
             if (opcion1 == 1)
             {
-                description = "Generación de Payment: " + titulo; //aprobacion
+
+                description = "Generación de Payment: " + titulo ; //aprobacion
                 opcion = 1;
-                body = "Se ha generado el payment " + titulo + " favor de dar seguimiento "; //aprobacion
+                body = "Se ha generado el payment <b>" + titulo + "</b> <br>" +
+                       "Favor de dar seguimiento "; //aprobacion
                 correo = correos;
 
             }
@@ -635,23 +636,27 @@ namespace PaymentD
             {
                 description = "Se ha puesto en proceso el payment " + titulo; //En proceso
                 opcion = 2;
-                body = "El payment " + titulo + " esta en proceso de pago."; //cancelacion
+                body = "El payment <b>" + titulo + "</b> <br>" +
+                       "Esta en proceso de pago.";
                 correo = correos;
             }
 
             if (opcion1 == 3)
             {
-                description = "El payment " + titulo +" fue aprobado"; //2 veces se envía
+                description = "El payment " + titulo + " fue aprobado"; //Pagado
                 opcion = 3;
-                body = "El payment " + titulo+ " fue pagado o esta por ser pagado."; //2 veces se envía
+                body = "El payment<b>" + titulo + "</b> <br>" +
+                       "Fue pagado o esta por ser pagado.";
                 correo = correos;
             }
 
             if (opcion1 == 4)
             {
-                description = "El payment " + titulo + " fue cancelado"; //2 veces se envía
+                description = "El payment " + titulo + " fue rechazado"; //Rechazado
                 opcion = 4;
-                body = "El payment " + titulo + " fue cancelado/Rechazado debido a "+ comentarios+ ", favor de comunicarte con personal de finanzas para una aclaración"; //2 veces se envía
+                body = "El payment <b>" + titulo + "</b>  fue cancelado/rechazado debido a: <br>" +
+                    "<b>" + comentarios+ ".</b><br>" +
+                    "Favor de comunicarte con personal de finanzas para una aclaración"; //2 veces se envía
                 correo = correos;
             }
             enviarcorreos(description, body, opcion1, correo);
@@ -681,11 +686,17 @@ namespace PaymentD
 
             MailMessage Mensaje = new MailMessage();
 
+            foreach (string email in varios.Split(','))
+            {
+                Mensaje.CC.Add(new MailAddress(email));
+            }
+
             Mensaje.To.Add(new MailAddress(correo));
-            Mensaje.CC.Add(new MailAddress(varios+"; "+ emailsupervisor));
+           
             Mensaje.From = new MailAddress(MailNotify);
             Mensaje.Subject = subject;
             Mensaje.Body = body;
+            Mensaje.IsBodyHtml=true;
 
             //if (!string.IsNullOrEmpty(attachment))
             //{

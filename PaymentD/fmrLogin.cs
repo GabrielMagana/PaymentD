@@ -15,6 +15,7 @@ namespace PaymentD
     {
 
         string Usuario, NombreCompleto;
+        string correo = string.Empty;
         int Nomina, Permiso=0;
         public fmrLogin()
         {
@@ -32,7 +33,7 @@ namespace PaymentD
             {
 
                 
-                frmprincipal frm = new frmprincipal(Usuario, NombreCompleto, Nomina, Permiso);
+                frmprincipal frm = new frmprincipal(Usuario, NombreCompleto, Nomina, Permiso,correo);
                 this.Hide();
                 frm.ShowDialog();
                 this.Close();
@@ -40,7 +41,7 @@ namespace PaymentD
 
             }
         }
-        string co = string.Empty;
+       
         private bool AutenticatheUser(String userName, String password)
         {
             bool ret = false;
@@ -57,7 +58,8 @@ namespace PaymentD
 
                 NombreCompleto = results.GetDirectoryEntry().Properties["DisplayName"].Value.ToString();
                 NTusername = results.GetDirectoryEntry().Properties["sAMAccountName"].Value.ToString();
-                co = results.GetDirectoryEntry().Properties["department"].Value.ToString();//department
+                correo = results.GetDirectoryEntry().Properties["mail"].Value.ToString();//correo
+
                 GetNTuser(txtUsuario.Text);
 
                 if (Permiso!=0)

@@ -14,8 +14,8 @@ namespace PaymentD
 {
     public partial class frmPaymentCaptura : Form
     {
-        string _usuario, _nomcompleto;
-        int _nnomina;
+        string _usuario, _nomcompleto,_correo;
+        int _nnomina,escaja,espago;
         string[] name = new string[5];
         string[] ext = new string[5];
 
@@ -24,7 +24,7 @@ namespace PaymentD
         string _extFA, _extP, _extnvpdf, _extInvxml, _extb2b;
         bool PaymentU = false;
 
-        public frmPaymentCaptura(int NNomina, string Usuario, string NomCompleto)
+        public frmPaymentCaptura(int NNomina, string Usuario, string NomCompleto,string correo)
         {
             InitializeComponent();
             Proc.combos(cmbArea, 1);
@@ -50,6 +50,7 @@ namespace PaymentD
             _nnomina = NNomina;
             _usuario = Usuario;
             _nomcompleto = NomCompleto;
+            _correo = correo;
             lstCC.Columns[0].Width = 0;
             chkCaja.Visible = false;
             chkpago.Visible = false;
@@ -58,6 +59,14 @@ namespace PaymentD
             label15.Visible = false;
             label16.Visible = false;
             label17.Visible = false;
+        }
+
+        private void chkCaja_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkCaja.Checked)
+            { escaja = 1; }
+            else
+            { escaja = 0; }
         }
 
         private void frmPaymentCaptura_Load(object sender, EventArgs e)
@@ -107,6 +116,7 @@ namespace PaymentD
         {
             if(chkpago.Checked==true)
             {
+                espago = 1;
                
                     switch (DateTime.Now.DayOfWeek)
                     {
@@ -140,6 +150,7 @@ namespace PaymentD
             else
             {
                 Proc.Determinarfecha(dtFechaPayment);
+                espago = 0;
             }
         }
 
@@ -276,7 +287,7 @@ namespace PaymentD
             }
           
 
-            Proc.GeneraPayment(check,onlypay, lstCC, txtPorpuse.Text, int.Parse(cmbArea.SelectedValue.ToString()),dtFechaPayment.Value, int.Parse(cmbAsignado.SelectedValue.ToString()), cmbClientea,  int.Parse(cmbMpago.SelectedValue.ToString()), int.Parse(cmbMoneda.SelectedValue.ToString()),_usuario, int.Parse(cmbEstatus.SelectedValue.ToString()), txtComentario.Text,  _nnomina, _streamFA,_streamP, _streamInvpdf, _streamxml, _streamb2b, name, ext) ;
+            Proc.GeneraPayment(check,onlypay, lstCC, txtPorpuse.Text, int.Parse(cmbArea.SelectedValue.ToString()),dtFechaPayment.Value, int.Parse(cmbAsignado.SelectedValue.ToString()), cmbClientea,  int.Parse(cmbMpago.SelectedValue.ToString()), int.Parse(cmbMoneda.SelectedValue.ToString()),_usuario, int.Parse(cmbEstatus.SelectedValue.ToString()), txtComentario.Text,  _nnomina, _streamFA,_streamP, _streamInvpdf, _streamxml, _streamb2b, name, ext,_correo,escaja,espago) ;
             txtPorpuse.Text = string.Empty;
             txtComentario.Text = string.Empty; 
             txtMonto.Text = string.Empty;
@@ -287,6 +298,13 @@ namespace PaymentD
             label15.Visible = false;
             label16.Visible = false;
             label17.Visible = false;
+            _nameP = "";
+            _nameInvpdf = "";
+            _nameInvxml = "";
+            _nameFA = "";
+            _nameb2b = "";
+            PaymentU = false;
+            cmbCliente.Text = string.Empty;
 
 
 
