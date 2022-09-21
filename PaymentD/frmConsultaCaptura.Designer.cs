@@ -92,6 +92,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.esCaja = new System.Windows.Forms.CheckBox();
+            this.esinmediato = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgPayment)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -245,6 +247,8 @@
             // groupBox2
             // 
             this.groupBox2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.groupBox2.Controls.Add(this.esinmediato);
+            this.groupBox2.Controls.Add(this.esCaja);
             this.groupBox2.Controls.Add(this.esPagado);
             this.groupBox2.Controls.Add(this.btnActualizar);
             this.groupBox2.Controls.Add(this.txtAmount);
@@ -311,7 +315,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtAmount.Enabled = false;
             this.txtAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAmount.Location = new System.Drawing.Point(222, 288);
+            this.txtAmount.Location = new System.Drawing.Point(225, 300);
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Size = new System.Drawing.Size(98, 18);
             this.txtAmount.TabIndex = 52;
@@ -320,7 +324,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(184, 288);
+            this.label13.Location = new System.Drawing.Point(187, 300);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(37, 13);
             this.label13.TabIndex = 51;
@@ -334,9 +338,9 @@
             this.cmbEmpleado.Enabled = false;
             this.cmbEmpleado.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbEmpleado.FormattingEnabled = true;
-            this.cmbEmpleado.Location = new System.Drawing.Point(98, 223);
+            this.cmbEmpleado.Location = new System.Drawing.Point(97, 235);
             this.cmbEmpleado.Name = "cmbEmpleado";
-            this.cmbEmpleado.Size = new System.Drawing.Size(222, 21);
+            this.cmbEmpleado.Size = new System.Drawing.Size(228, 21);
             this.cmbEmpleado.TabIndex = 50;
             this.cmbEmpleado.SelectedIndexChanged += new System.EventHandler(this.cmbEmpleado_SelectedIndexChanged);
             // 
@@ -571,7 +575,7 @@
             this.dtFechaPayment.Enabled = false;
             this.dtFechaPayment.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtFechaPayment.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtFechaPayment.Location = new System.Drawing.Point(94, 252);
+            this.dtFechaPayment.Location = new System.Drawing.Point(97, 264);
             this.dtFechaPayment.Name = "dtFechaPayment";
             this.dtFechaPayment.Size = new System.Drawing.Size(222, 18);
             this.dtFechaPayment.TabIndex = 43;
@@ -590,7 +594,7 @@
             this.txtComentario.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtComentario.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtComentario.Location = new System.Drawing.Point(94, 386);
+            this.txtComentario.Location = new System.Drawing.Point(97, 398);
             this.txtComentario.Multiline = true;
             this.txtComentario.Name = "txtComentario";
             this.txtComentario.Size = new System.Drawing.Size(228, 67);
@@ -611,7 +615,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbEstatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbEstatus.FormattingEnabled = true;
-            this.cmbEstatus.Location = new System.Drawing.Point(94, 354);
+            this.cmbEstatus.Location = new System.Drawing.Point(97, 366);
             this.cmbEstatus.Name = "cmbEstatus";
             this.cmbEstatus.Size = new System.Drawing.Size(225, 21);
             this.cmbEstatus.TabIndex = 41;
@@ -634,7 +638,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbAsignado.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbAsignado.FormattingEnabled = true;
-            this.cmbAsignado.Location = new System.Drawing.Point(94, 323);
+            this.cmbAsignado.Location = new System.Drawing.Point(97, 335);
             this.cmbAsignado.Name = "cmbAsignado";
             this.cmbAsignado.Size = new System.Drawing.Size(226, 21);
             this.cmbAsignado.TabIndex = 40;
@@ -654,7 +658,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbMoneda.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbMoneda.FormattingEnabled = true;
-            this.cmbMoneda.Location = new System.Drawing.Point(94, 288);
+            this.cmbMoneda.Location = new System.Drawing.Point(97, 300);
             this.cmbMoneda.Name = "cmbMoneda";
             this.cmbMoneda.Size = new System.Drawing.Size(86, 21);
             this.cmbMoneda.TabIndex = 39;
@@ -675,7 +679,7 @@
             this.cmbBeneficiario.Enabled = false;
             this.cmbBeneficiario.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbBeneficiario.FormattingEnabled = true;
-            this.cmbBeneficiario.Location = new System.Drawing.Point(98, 223);
+            this.cmbBeneficiario.Location = new System.Drawing.Point(98, 235);
             this.cmbBeneficiario.Name = "cmbBeneficiario";
             this.cmbBeneficiario.Size = new System.Drawing.Size(222, 21);
             this.cmbBeneficiario.TabIndex = 38;
@@ -683,7 +687,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(10, 323);
+            this.label8.Location = new System.Drawing.Point(13, 335);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(60, 13);
             this.label8.TabIndex = 29;
@@ -692,7 +696,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(11, 289);
+            this.label7.Location = new System.Drawing.Point(14, 301);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(46, 13);
             this.label7.TabIndex = 30;
@@ -713,7 +717,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(10, 355);
+            this.label6.Location = new System.Drawing.Point(13, 367);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(42, 13);
             this.label6.TabIndex = 31;
@@ -734,7 +738,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(10, 392);
+            this.label5.Location = new System.Drawing.Point(13, 404);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 13);
             this.label5.TabIndex = 32;
@@ -743,7 +747,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(10, 256);
+            this.label9.Location = new System.Drawing.Point(13, 268);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(79, 13);
             this.label9.TabIndex = 33;
@@ -752,7 +756,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(10, 224);
+            this.label10.Location = new System.Drawing.Point(13, 236);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(62, 13);
             this.label10.TabIndex = 35;
@@ -762,7 +766,7 @@
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.Enabled = false;
-            this.checkBox1.Location = new System.Drawing.Point(12, 205);
+            this.checkBox1.Location = new System.Drawing.Point(13, 207);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(75, 17);
             this.checkBox1.TabIndex = 34;
@@ -778,6 +782,28 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
+            // 
+            // esCaja
+            // 
+            this.esCaja.AutoSize = true;
+            this.esCaja.Enabled = false;
+            this.esCaja.Location = new System.Drawing.Point(101, 207);
+            this.esCaja.Name = "esCaja";
+            this.esCaja.Size = new System.Drawing.Size(77, 17);
+            this.esCaja.TabIndex = 55;
+            this.esCaja.Text = "Caja Chica";
+            this.esCaja.UseVisualStyleBackColor = true;
+            // 
+            // esinmediato
+            // 
+            this.esinmediato.AutoSize = true;
+            this.esinmediato.Enabled = false;
+            this.esinmediato.Location = new System.Drawing.Point(190, 207);
+            this.esinmediato.Name = "esinmediato";
+            this.esinmediato.Size = new System.Drawing.Size(100, 17);
+            this.esinmediato.TabIndex = 56;
+            this.esinmediato.Text = "Pago Inmediato";
+            this.esinmediato.UseVisualStyleBackColor = true;
             // 
             // frmConsultaCaptura
             // 
@@ -866,5 +892,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ClaveCentro;
         private System.Windows.Forms.DataGridViewTextBoxColumn NomCostos;
         private System.Windows.Forms.DataGridViewTextBoxColumn AmountD;
+        private System.Windows.Forms.CheckBox esinmediato;
+        private System.Windows.Forms.CheckBox esCaja;
     }
 }

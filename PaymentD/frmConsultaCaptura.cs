@@ -27,7 +27,11 @@ namespace PaymentD
         {
             InitializeComponent();
             _usuario = Usuario;
-            _tipoUsuario = TipoUsuario; 
+            _tipoUsuario = TipoUsuario;
+            esCaja.Enabled = false;
+            esCaja.Visible = false;
+            esinmediato.Enabled = false;
+            esinmediato.Visible = false;
         }
 
         private void dtgPayment_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -66,6 +70,52 @@ namespace PaymentD
                 esPagado.Checked = true;
             }
 
+            if (string.IsNullOrEmpty(dt.Rows[0]["esCajaChica"].ToString())==true)
+                 
+                {
+                    esCaja.Checked = false;
+                    esCaja.Visible = false;
+                
+                }
+            else
+                {
+
+                if (bool.Parse(dt.Rows[0]["esCajaChica"].ToString()) == false)
+                {
+                    esCaja.Checked = false;
+                    esCaja.Visible = false;
+
+                }
+                else
+                {
+                    esCaja.Checked = true;
+                    esCaja.Visible = true;
+                }
+            }
+
+            if (string.IsNullOrEmpty(dt.Rows[0]["esPagoInmediato"].ToString()) == true)
+
+            {
+                esinmediato.Checked = false;
+                esinmediato.Visible = false;
+
+            }
+            else
+            {
+                if (bool.Parse(dt.Rows[0]["esPagoInmediato"].ToString()) == false)
+                {
+                    esinmediato.Checked = false;
+                    esinmediato.Visible = false;
+
+                }
+                else
+                {
+                    esinmediato.Checked = true;
+                    esinmediato.Visible = true;
+                }
+            }
+
+
 
 
             txtPorpuse.Text = dt.Rows[0]["Descripcion"].ToString();
@@ -85,6 +135,7 @@ namespace PaymentD
             ClaEstatusPerm = int.Parse(dt.Rows[0]["ClaEstatus"].ToString());
             txtAmount.Text = dt.Rows[0]["Amount"].ToString();
             Idpayment = id;
+
             
 
             if (ClaEstatusPerm == 4 || ClaEstatusPerm == 3 || _tipoUsuario==2)
