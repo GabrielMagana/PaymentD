@@ -37,50 +37,46 @@ namespace PaymentD
         private void dtgPayment_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             DataTable dt = new DataTable();
-            int id,beneficiario=0,empleado=0,proveedor=0;
-           
-            id =int.Parse(dtgPayment.Rows[e.RowIndex].Cells[0].Value.ToString());
-            dt = Proc.BuscarEncabezado(id);
-
-
-            proveedor = int.Parse(dt.Rows[0]["esProveedor"].ToString());
-
-            if (proveedor == 0)
-            { 
-                beneficiario = 0;
-                checkBox1.Checked = false;
-                cmbBeneficiario.Visible = false;
-                cmbEmpleado.Visible = true;
-                empleado = int.Parse(dt.Rows[0]["claBeneficiario"].ToString());
-            }
-            else
-            {   
-                empleado = 0;
-                checkBox1.Checked = true;
-                cmbBeneficiario.Visible = true;
-                cmbEmpleado.Visible = false;
-                beneficiario= int.Parse(dt.Rows[0]["claBeneficiario"].ToString());
-            }
-           
-            if(bool.Parse(dt.Rows[0]["PagadoSn"].ToString())==false)
+            int id,beneficiario=0,empleado=0,proveedor=0,renglon=0;
+            renglon = dtgPayment.CurrentRow.Index;
+            if (renglon > 0)
             {
-                esPagado.Checked = false;
-            }
-            else {
-                esPagado.Checked = true;
-            }
 
-            if (string.IsNullOrEmpty(dt.Rows[0]["esCajaChica"].ToString())==true)
-                 
+                id = int.Parse(dtgPayment.Rows[e.RowIndex].Cells[0].Value.ToString());
+
+                dt = Proc.BuscarEncabezado(id);
+
+
+                proveedor = int.Parse(dt.Rows[0]["esProveedor"].ToString());
+
+                if (proveedor == 0)
                 {
-                    esCaja.Checked = false;
-                    esCaja.Visible = false;
-                
+                    beneficiario = 0;
+                    checkBox1.Checked = false;
+                    cmbBeneficiario.Visible = false;
+                    cmbEmpleado.Visible = true;
+                    empleado = int.Parse(dt.Rows[0]["claBeneficiario"].ToString());
                 }
-            else
+                else
                 {
+                    empleado = 0;
+                    checkBox1.Checked = true;
+                    cmbBeneficiario.Visible = true;
+                    cmbEmpleado.Visible = false;
+                    beneficiario = int.Parse(dt.Rows[0]["claBeneficiario"].ToString());
+                }
 
-                if (bool.Parse(dt.Rows[0]["esCajaChica"].ToString()) == false)
+                if (bool.Parse(dt.Rows[0]["PagadoSn"].ToString()) == false)
+                {
+                    esPagado.Checked = false;
+                }
+                else
+                {
+                    esPagado.Checked = true;
+                }
+
+                if (string.IsNullOrEmpty(dt.Rows[0]["esCajaChica"].ToString()) == true)
+
                 {
                     esCaja.Checked = false;
                     esCaja.Visible = false;
@@ -88,21 +84,22 @@ namespace PaymentD
                 }
                 else
                 {
-                    esCaja.Checked = true;
-                    esCaja.Visible = true;
+
+                    if (bool.Parse(dt.Rows[0]["esCajaChica"].ToString()) == false)
+                    {
+                        esCaja.Checked = false;
+                        esCaja.Visible = false;
+
+                    }
+                    else
+                    {
+                        esCaja.Checked = true;
+                        esCaja.Visible = true;
+                    }
                 }
-            }
 
-            if (string.IsNullOrEmpty(dt.Rows[0]["esPagoInmediato"].ToString()) == true)
+                if (string.IsNullOrEmpty(dt.Rows[0]["esPagoInmediato"].ToString()) == true)
 
-            {
-                esinmediato.Checked = false;
-                esinmediato.Visible = false;
-
-            }
-            else
-            {
-                if (bool.Parse(dt.Rows[0]["esPagoInmediato"].ToString()) == false)
                 {
                     esinmediato.Checked = false;
                     esinmediato.Visible = false;
@@ -110,59 +107,67 @@ namespace PaymentD
                 }
                 else
                 {
-                    esinmediato.Checked = true;
-                    esinmediato.Visible = true;
+                    if (bool.Parse(dt.Rows[0]["esPagoInmediato"].ToString()) == false)
+                    {
+                        esinmediato.Checked = false;
+                        esinmediato.Visible = false;
+
+                    }
+                    else
+                    {
+                        esinmediato.Checked = true;
+                        esinmediato.Visible = true;
+                    }
                 }
+
+
+
+
+                txtPorpuse.Text = dt.Rows[0]["Descripcion"].ToString();
+                txtFolio.Text = dt.Rows[0]["ClavePayment"].ToString();
+                txtNumeroNomina.Text = dt.Rows[0]["IdSolicitante"].ToString();
+                txtNombre.Text = dt.Rows[0]["NomUsuario"].ToString();
+                usuariot = dt.Rows[0]["Usuario"].ToString();
+                txtComentario.Text = dt.Rows[0]["txtObservaciones"].ToString();
+                cmbArea.SelectedValue = int.Parse(dt.Rows[0]["IdArea"].ToString());
+                cmbMpago.SelectedValue = int.Parse(dt.Rows[0]["ClaTipoPago"].ToString());
+                cmbMoneda.SelectedValue = int.Parse(dt.Rows[0]["ClaMoneda"].ToString());
+                cmbBeneficiario.SelectedValue = beneficiario;
+                cmbAsignado.SelectedValue = int.Parse(dt.Rows[0]["IdEmpleadoAsign"].ToString());
+                cmbEmpleado.SelectedValue = empleado;
+                dtFechaPayment.Value = DateTime.Parse(dt.Rows[0]["DtFechaPago"].ToString());
+                cmbEstatus.SelectedValue = int.Parse(dt.Rows[0]["ClaEstatus"].ToString());
+                ClaEstatusPerm = int.Parse(dt.Rows[0]["ClaEstatus"].ToString());
+                txtAmount.Text = dt.Rows[0]["Amount"].ToString();
+                Idpayment = id;
+
+
+
+                if (ClaEstatusPerm == 4 || ClaEstatusPerm == 3 || _tipoUsuario == 2)
+                {
+                    txtComentario.Enabled = false;
+                    cmbArea.Enabled = false;
+                    cmbMpago.Enabled = false;
+                    cmbMoneda.Enabled = false;
+                    cmbBeneficiario.Enabled = false;
+                    cmbAsignado.Enabled = false;
+                    cmbEmpleado.Enabled = false;
+                    checkBox1.Enabled = false;
+                    cmbEstatus.Enabled = false;
+                    btnActualizar.Visible = false;
+
+                }
+                else
+                {
+                    cmbEstatus.Enabled = true;
+                    cmbAsignado.Enabled = true;
+                    txtComentario.Enabled = true;
+                    cmbMoneda.Enabled = true;
+                    btnActualizar.Visible = true;
+                }
+
+                llenarDetalle(id);
             }
-
-
-
-
-            txtPorpuse.Text = dt.Rows[0]["Descripcion"].ToString();
-            txtFolio.Text = dt.Rows[0]["ClavePayment"].ToString();
-            txtNumeroNomina.Text = dt.Rows[0]["IdSolicitante"].ToString();
-            txtNombre.Text = dt.Rows[0]["NomUsuario"].ToString();
-            usuariot= dt.Rows[0]["Usuario"].ToString();
-            txtComentario.Text = dt.Rows[0]["txtObservaciones"].ToString();
-            cmbArea.SelectedValue = int.Parse(dt.Rows[0]["IdArea"].ToString());
-            cmbMpago.SelectedValue = int.Parse(dt.Rows[0]["ClaTipoPago"].ToString());
-            cmbMoneda.SelectedValue = int.Parse(dt.Rows[0]["ClaMoneda"].ToString());
-            cmbBeneficiario.SelectedValue = beneficiario;
-            cmbAsignado.SelectedValue = int.Parse(dt.Rows[0]["IdEmpleadoAsign"].ToString());
-            cmbEmpleado.SelectedValue = empleado;
-            dtFechaPayment.Value = DateTime.Parse(dt.Rows[0]["DtFechaPago"].ToString());
-            cmbEstatus.SelectedValue = int.Parse(dt.Rows[0]["ClaEstatus"].ToString());
-            ClaEstatusPerm = int.Parse(dt.Rows[0]["ClaEstatus"].ToString());
-            txtAmount.Text = dt.Rows[0]["Amount"].ToString();
-            Idpayment = id;
-
-            
-
-            if (ClaEstatusPerm == 4 || ClaEstatusPerm == 3 || _tipoUsuario==2)
-            {
-                txtComentario.Enabled = false;
-                cmbArea.Enabled = false;
-                cmbMpago.Enabled = false;
-                cmbMoneda.Enabled = false;
-                cmbBeneficiario.Enabled = false;
-                cmbAsignado.Enabled = false;
-                cmbEmpleado.Enabled = false;
-                checkBox1.Enabled = false;
-                cmbEstatus.Enabled = false;
-                btnActualizar.Visible = false;
-
-            }
-            else
-            {
-                cmbEstatus.Enabled = true;
-                cmbAsignado.Enabled = true;
-                txtComentario.Enabled = true;
-                cmbMoneda.Enabled = true;
-                btnActualizar.Visible = true;
-            }
-
-            llenarDetalle(id);
-
         }
 
         private void ConsultaCaptura_Load(object sender, EventArgs e)
@@ -306,55 +311,53 @@ namespace PaymentD
         private void dtgPaymentDocs_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (_tipoUsuario == 1)
-            { 
-                    DataTable dtdocs = new DataTable();
-                int IdPayments, iddocs;
-                byte[] archivo = null;
-
-                string path = "C:\\";
-                string folder = path + "tempDocs\\";
-                string fullfilepath;
-
-                IdPayments = int.Parse(dtgPaymentDocs.Rows[e.RowIndex].Cells[0].Value.ToString());
-                iddocs = int.Parse(dtgPaymentDocs.Rows[e.RowIndex].Cells[1].Value.ToString());
-
-                fullfilepath = folder + dtgPaymentDocs.Rows[e.RowIndex].Cells[3].Value;
-
-                DataTable Ds = new DataTable();
-
-                string sql = "[dbo].[BuscardocumentoSel]";
-
-                using (SqlConnection conn1 = new SqlConnection(ConnectionString))
+            {
+                if (dtgPaymentDocs.CurrentRow.Index>0)
                 {
-                    conn1.Open();
-                    SqlCommand cmd = new SqlCommand(sql, conn1);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@IdPayment", IdPayments);
-                    cmd.Parameters.AddWithValue("@IdArchivo", iddocs);
-                    cmd.CommandTimeout = 420;
+                    DataTable dtdocs = new DataTable();
+                    int IdPayments, iddocs;
+                    byte[] archivo = null;
 
-                    archivo = (byte[])cmd.ExecuteScalar();
+                    string path = "C:\\";
+                    string folder = path + "tempDocs\\";
+                    string fullfilepath;
 
+                    IdPayments = int.Parse(dtgPaymentDocs.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    iddocs = int.Parse(dtgPaymentDocs.Rows[e.RowIndex].Cells[1].Value.ToString());
+
+                    fullfilepath = folder + dtgPaymentDocs.Rows[e.RowIndex].Cells[3].Value;
+
+                    DataTable Ds = new DataTable();
+
+                    string sql = "[dbo].[BuscardocumentoSel]";
+
+                    using (SqlConnection conn1 = new SqlConnection(ConnectionString))
+                    {
+                        conn1.Open();
+                        SqlCommand cmd = new SqlCommand(sql, conn1);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@IdPayment", IdPayments);
+                        cmd.Parameters.AddWithValue("@IdArchivo", iddocs);
+                        cmd.CommandTimeout = 420;
+
+                        archivo = (byte[])cmd.ExecuteScalar();
+
+                    }
+
+                    if (!Directory.Exists(folder))
+                        Directory.CreateDirectory(folder);
+
+                    if (File.Exists(fullfilepath))
+                        File.Delete(fullfilepath);
+
+                    File.WriteAllBytes(fullfilepath, archivo);
+
+                    Process.Start(fullfilepath);
+
+
+                    MessageBox.Show("El documento fue creado con exito en la ruta: " + fullfilepath, "Descarga exitosa", MessageBoxButtons.OK);
                 }
-
-                if (!Directory.Exists(folder))
-                    Directory.CreateDirectory(folder);
-
-                if (File.Exists(fullfilepath))
-                    File.Delete(fullfilepath);
-
-                File.WriteAllBytes(fullfilepath, archivo);
-
-                Process.Start(fullfilepath);
-
-
-                MessageBox.Show("El documento fue creado con exito en la ruta: " + fullfilepath, "Descarga exitosa", MessageBoxButtons.OK);
             }
-        }
-
-        private void label13_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void cmbEmpleado_SelectedIndexChanged(object sender, EventArgs e)
@@ -469,6 +472,7 @@ namespace PaymentD
             ClaEstatusPerm = int.Parse(dt.Rows[0]["ClaEstatus"].ToString());
             txtAmount.Text = dt.Rows[0]["Amount"].ToString();
             Idpayment = IdPayment;
+            _correo= dt.Rows[0]["email"].ToString();
 
 
             if (ClaEstatusPerm == 4 || ClaEstatusPerm == 3)

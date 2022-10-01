@@ -29,16 +29,64 @@ namespace PaymentD
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (AutenticatheUser(txtUsuario.Text, txtPassword.Text))
+
+            if(string.IsNullOrWhiteSpace(txtUsuario.Text))
             {
+                MessageBox.Show("Favor de capturar el usuario", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(txtPassword.Text))
+            {
+                MessageBox.Show("Favor de capturar la contraseña", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-                
-                frmprincipal frm = new frmprincipal(Usuario, NombreCompleto, Nomina, Permiso,correo);
-                this.Hide();
-                frm.ShowDialog();
-                this.Close();
+            DataTable dt = new DataTable();
+            if (txtUsuario.Text.Contains("mmvouser"))
+            {
+                try
+                {
+                    
+                    dt = Proc.ValidarUsuarios(txtUsuario.Text, txtPassword.Text);
+
+                    Usuario = dt.Rows[0]["Usuario"].ToString().Trim();
+                    NombreCompleto = dt.Rows[0]["NomUsuario"].ToString().Trim();
+                    Nomina = int.Parse(dt.Rows[0]["ClaUsuario"].ToString().Trim());
+                    correo = dt.Rows[0]["email"].ToString().Trim();
+
+                    if (string.IsNullOrEmpty(dt.Rows[0]["ClaTipoUsuario"].ToString().Trim()) == true)
+                    {
+                        Permiso = 0;
+                        MessageBox.Show("Favor de comunicarse al área de finanzas para poder acceder al programa", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    else
+                    {
+                        Permiso = int.Parse(dt.Rows[0]["ClaTipoUsuario"].ToString().Trim());
+                        frmprincipal frm = new frmprincipal(Usuario, NombreCompleto, Nomina, Permiso, correo);
+                        this.Hide();
+                        frm.ShowDialog();
+                        this.Close();
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Favor de comunicarse al área de finanzas para poder acceder al programa", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            else
+            {
+                if (AutenticatheUser(txtUsuario.Text, txtPassword.Text))
+                {
 
 
+                    frmprincipal frm = new frmprincipal(Usuario, NombreCompleto, Nomina, Permiso, correo);
+                    this.Hide();
+                    frm.ShowDialog();
+                    this.Close();
+
+                }
             }
         }
        
@@ -97,7 +145,7 @@ namespace PaymentD
         public void GetNTuser(string NTuserAD)
         {
             DataTable dt = new DataTable();
-            dt = Proc.ValidarUsuarios(NTuserAD);
+            dt = Proc.ValidarUsuarios(NTuserAD,"");
             Usuario = dt.Rows[0]["Usuario"].ToString().Trim();
             NombreCompleto = dt.Rows[0]["NomUsuario"].ToString().Trim();
             Nomina = int.Parse(dt.Rows[0]["ClaUsuario"].ToString().Trim());

@@ -97,7 +97,7 @@ namespace PaymentD
                 
             }
 
-            if (cmbCliente.GetItemText(cmbCliente.SelectedItem) == "PROVEEDORES VARIOS" || cmbCliente.GetItemText(cmbCliente.SelectedItem) == "SECRETARIA DE HACIENDA Y CREDITO PUBLICO" || cmbCliente.GetItemText(cmbCliente.SelectedItem) == "SECRETARIA DE FINANZAS, INVERSION Y ADMINISTRACION")
+            if (cmbCliente.GetItemText(cmbCliente.SelectedItem) == "LICENCIAS" || cmbCliente.GetItemText(cmbCliente.SelectedItem) == "PROVEEDORES VARIOS" || cmbCliente.GetItemText(cmbCliente.SelectedItem) == "SECRETARIA DE HACIENDA Y CREDITO PUBLICO" || cmbCliente.GetItemText(cmbCliente.SelectedItem) == "SECRETARIA DE FINANZAS, INVERSION Y ADMINISTRACION")
             {
                 PaymentU = true;
                

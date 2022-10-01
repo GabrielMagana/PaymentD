@@ -364,7 +364,7 @@ namespace PaymentD
 
 
 
-        public static DataTable ValidarUsuarios(string usuario)
+        public static DataTable ValidarUsuarios(string usuario, string password)
         {
             DataTable dt = new DataTable();
             
@@ -375,6 +375,7 @@ namespace PaymentD
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@Usuario", usuario);
+                cmd.Parameters.AddWithValue("@password", password);
 
                 SqlDataAdapter Lector = new SqlDataAdapter(cmd);
                 Lector.Fill(dt);

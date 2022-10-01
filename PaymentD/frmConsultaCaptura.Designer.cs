@@ -49,6 +49,8 @@
             this.ClaEstatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NomEstatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.esinmediato = new System.Windows.Forms.CheckBox();
+            this.esCaja = new System.Windows.Forms.CheckBox();
             this.esPagado = new System.Windows.Forms.CheckBox();
             this.btnActualizar = new System.Windows.Forms.Button();
             this.txtAmount = new System.Windows.Forms.TextBox();
@@ -92,8 +94,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.esCaja = new System.Windows.Forms.CheckBox();
-            this.esinmediato = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgPayment)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -287,6 +287,28 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Detalles";
             // 
+            // esinmediato
+            // 
+            this.esinmediato.AutoSize = true;
+            this.esinmediato.Enabled = false;
+            this.esinmediato.Location = new System.Drawing.Point(190, 207);
+            this.esinmediato.Name = "esinmediato";
+            this.esinmediato.Size = new System.Drawing.Size(100, 17);
+            this.esinmediato.TabIndex = 56;
+            this.esinmediato.Text = "Pago Inmediato";
+            this.esinmediato.UseVisualStyleBackColor = true;
+            // 
+            // esCaja
+            // 
+            this.esCaja.AutoSize = true;
+            this.esCaja.Enabled = false;
+            this.esCaja.Location = new System.Drawing.Point(101, 207);
+            this.esCaja.Name = "esCaja";
+            this.esCaja.Size = new System.Drawing.Size(77, 17);
+            this.esCaja.TabIndex = 55;
+            this.esCaja.Text = "Caja Chica";
+            this.esCaja.UseVisualStyleBackColor = true;
+            // 
             // esPagado
             // 
             this.esPagado.AutoSize = true;
@@ -329,7 +351,6 @@
             this.label13.Size = new System.Drawing.Size(37, 13);
             this.label13.TabIndex = 51;
             this.label13.Text = "Monto";
-            this.label13.Click += new System.EventHandler(this.label13_Click);
             // 
             // cmbEmpleado
             // 
@@ -782,28 +803,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
-            // 
-            // esCaja
-            // 
-            this.esCaja.AutoSize = true;
-            this.esCaja.Enabled = false;
-            this.esCaja.Location = new System.Drawing.Point(101, 207);
-            this.esCaja.Name = "esCaja";
-            this.esCaja.Size = new System.Drawing.Size(77, 17);
-            this.esCaja.TabIndex = 55;
-            this.esCaja.Text = "Caja Chica";
-            this.esCaja.UseVisualStyleBackColor = true;
-            // 
-            // esinmediato
-            // 
-            this.esinmediato.AutoSize = true;
-            this.esinmediato.Enabled = false;
-            this.esinmediato.Location = new System.Drawing.Point(190, 207);
-            this.esinmediato.Name = "esinmediato";
-            this.esinmediato.Size = new System.Drawing.Size(100, 17);
-            this.esinmediato.TabIndex = 56;
-            this.esinmediato.Text = "Pago Inmediato";
-            this.esinmediato.UseVisualStyleBackColor = true;
             // 
             // frmConsultaCaptura
             // 
