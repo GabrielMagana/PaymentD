@@ -24,7 +24,7 @@ namespace PaymentD
         public static string pass;
 
         string Pc = Environment.MachineName;
-        public static void combos(ComboBox obj, int opcion)
+        public static void combos(ComboBox obj, int opcion,int opcion2)
         {
             DataTable dt = new DataTable();
             using (SqlConnection conn1 = new SqlConnection(ConnectionString))
@@ -33,7 +33,8 @@ namespace PaymentD
                 SqlCommand cmd = new SqlCommand("dbo.combos", conn1);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@opcion", opcion); 
+                cmd.Parameters.AddWithValue("@opcion", opcion);
+                cmd.Parameters.AddWithValue("@opcion2", opcion2);
 
                 SqlDataAdapter Lector = new SqlDataAdapter(cmd);
                 Lector.Fill(dt);
@@ -275,6 +276,7 @@ namespace PaymentD
                     {
 
                         int costo = int.Parse(data.SubItems[0].Text);
+                        int idbudget = int.Parse(data.SubItems[5].Text);
                         decimal monto = decimal.Parse(data.SubItems[2].Text);
 
                         cmd.CommandText="dbo.DetallePayment";
@@ -283,6 +285,7 @@ namespace PaymentD
                         cmd.Parameters.AddWithValue("@idPayment", idpayment);
                         cmd.Parameters.AddWithValue("@idcosto", costo);
                         cmd.Parameters.AddWithValue("@Monto", monto);
+                        cmd.Parameters.AddWithValue("@idBudget", idbudget);
                         cmd.Parameters.AddWithValue("@Usuario",usuario);
                         cmd.ExecuteNonQuery();
 
@@ -348,7 +351,7 @@ namespace PaymentD
                     
                 
                     MessageBox.Show ("Payment Generado correctamente");
-                    enviocorreo(1, usuarioCorreo, porpuse,"");
+                  //  enviocorreo(1, usuarioCorreo, porpuse,"");
                 }
                 catch(Exception e)
                 {

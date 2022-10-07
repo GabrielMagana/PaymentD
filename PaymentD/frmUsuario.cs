@@ -22,7 +22,7 @@ namespace PaymentD
         {
             InitializeComponent();
             _usuario = usuario;
-            Proc.combos(cmbTipo, 9);
+            Proc.combos(cmbTipo, 9,0);
         }
 
         private void frmCatalogos_Load(object sender, EventArgs e)

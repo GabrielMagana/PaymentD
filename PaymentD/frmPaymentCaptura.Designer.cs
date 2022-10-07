@@ -55,6 +55,8 @@
             this.txtNumeroNomina = new System.Windows.Forms.TextBox();
             this.dtFechaPayment = new System.Windows.Forms.DateTimePicker();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cmbBudget = new System.Windows.Forms.ComboBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -77,6 +79,8 @@
             this.cmbCcostos = new System.Windows.Forms.ComboBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.colBudget = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.idBudget = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -202,6 +206,7 @@
             this.cmbArea.Name = "cmbArea";
             this.cmbArea.Size = new System.Drawing.Size(351, 21);
             this.cmbArea.TabIndex = 13;
+            this.cmbArea.SelectedIndexChanged += new System.EventHandler(this.cmbArea_SelectedIndexChanged);
             // 
             // cmbMpago
             // 
@@ -368,6 +373,8 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.cmbBudget);
+            this.groupBox2.Controls.Add(this.label18);
             this.groupBox2.Controls.Add(this.label17);
             this.groupBox2.Controls.Add(this.label16);
             this.groupBox2.Controls.Add(this.label14);
@@ -389,6 +396,23 @@
             this.groupBox2.Size = new System.Drawing.Size(459, 555);
             this.groupBox2.TabIndex = 22;
             this.groupBox2.TabStop = false;
+            // 
+            // cmbBudget
+            // 
+            this.cmbBudget.FormattingEnabled = true;
+            this.cmbBudget.Location = new System.Drawing.Point(165, 87);
+            this.cmbBudget.Name = "cmbBudget";
+            this.cmbBudget.Size = new System.Drawing.Size(288, 21);
+            this.cmbBudget.TabIndex = 40;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(22, 90);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(41, 13);
+            this.label18.TabIndex = 39;
+            this.label18.Text = "Budget";
             // 
             // label17
             // 
@@ -474,7 +498,9 @@
             this.idCentroCostos,
             this.CentroCostos,
             this.colMonto,
-            this.ColMoneda});
+            this.colBudget,
+            this.ColMoneda,
+            this.idBudget});
             this.lstCC.HideSelection = false;
             this.lstCC.Location = new System.Drawing.Point(6, 145);
             this.lstCC.Name = "lstCC";
@@ -486,23 +512,24 @@
             // idCentroCostos
             // 
             this.idCentroCostos.Text = "idCC";
-            this.idCentroCostos.Width = 50;
+            this.idCentroCostos.Width = 0;
             // 
             // CentroCostos
             // 
             this.CentroCostos.Text = "Centro de Costos";
-            this.CentroCostos.Width = 210;
+            this.CentroCostos.Width = 150;
             // 
             // colMonto
             // 
             this.colMonto.Text = "Monto";
             this.colMonto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.colMonto.Width = 168;
+            this.colMonto.Width = 90;
             // 
             // ColMoneda
             // 
+            this.ColMoneda.DisplayIndex = 4;
             this.ColMoneda.Text = "Moneda";
-            this.ColMoneda.Width = 108;
+            this.ColMoneda.Width = 90;
             // 
             // btnInv
             // 
@@ -540,7 +567,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(22, 66);
+            this.label13.Location = new System.Drawing.Point(22, 56);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(37, 13);
             this.label13.TabIndex = 3;
@@ -549,7 +576,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(22, 29);
+            this.label12.Location = new System.Drawing.Point(22, 16);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(87, 13);
             this.label12.TabIndex = 2;
@@ -557,9 +584,9 @@
             // 
             // txtMonto
             // 
-            this.txtMonto.Location = new System.Drawing.Point(165, 63);
+            this.txtMonto.Location = new System.Drawing.Point(165, 53);
             this.txtMonto.Name = "txtMonto";
-            this.txtMonto.Size = new System.Drawing.Size(188, 20);
+            this.txtMonto.Size = new System.Drawing.Size(219, 20);
             this.txtMonto.TabIndex = 1;
             this.txtMonto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtMonto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMonto_KeyPress);
@@ -567,9 +594,9 @@
             // cmbCcostos
             // 
             this.cmbCcostos.FormattingEnabled = true;
-            this.cmbCcostos.Location = new System.Drawing.Point(165, 26);
+            this.cmbCcostos.Location = new System.Drawing.Point(165, 13);
             this.cmbCcostos.Name = "cmbCcostos";
-            this.cmbCcostos.Size = new System.Drawing.Size(188, 21);
+            this.cmbCcostos.Size = new System.Drawing.Size(219, 21);
             this.cmbCcostos.TabIndex = 0;
             this.cmbCcostos.SelectedIndexChanged += new System.EventHandler(this.cmbCcostos_SelectedIndexChanged);
             // 
@@ -586,6 +613,18 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 23;
             this.pictureBox1.TabStop = false;
+            // 
+            // colBudget
+            // 
+            this.colBudget.DisplayIndex = 3;
+            this.colBudget.Text = "Budget";
+            this.colBudget.Width = 150;
+            // 
+            // idBudget
+            // 
+            this.idBudget.DisplayIndex = 5;
+            this.idBudget.Text = "idbudget";
+            this.idBudget.Width = 0;
             // 
             // frmPaymentCaptura
             // 
@@ -663,5 +702,9 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox cmbBudget;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.ColumnHeader colBudget;
+        private System.Windows.Forms.ColumnHeader idBudget;
     }
 }

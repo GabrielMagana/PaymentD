@@ -33,13 +33,64 @@ namespace PaymentD
             esinmediato.Enabled = false;
             esinmediato.Visible = false;
         }
+        private void ConsultaCaptura_Load(object sender, EventArgs e)
+        {
+            Formato(_tipoUsuario);
 
+            Proc.combos(cmbArea, 1, 0);
+            Proc.combos(cmbMpago, 5, 0);
+            Proc.combos(cmbMoneda, 3, 0);
+            Proc.combos(cmbEstatus, 2,0);
+            Proc.combos(cmbBeneficiario, 7,0);
+            Proc.combos(cmbEmpleado, 6,0);
+            Proc.combos(cmbAsignado, 8,0);
+            //Proc.combos(cmbbudget, 10, 0);
+            cmbArea.SelectedValue = 0;
+            cmbMpago.SelectedValue = 0;
+            cmbMoneda.SelectedValue = 0;
+            cmbBeneficiario.SelectedValue = 0;
+            cmbAsignado.SelectedValue = 0;
+            cmbEmpleado.SelectedValue = 0;
+            cmbEstatus.SelectedValue = 0;
+            //cmbBudget.SelectedValue = 0;
+
+            DataTable dt = new DataTable();
+            dt = Proc.llenarData(_tipoUsuario, _usuario, dtpFecha.Value);
+
+
+            dtgPayment.AutoGenerateColumns = false;
+            dtgPayment.ColumnCount = 9;
+
+            dtgPayment.Columns[0].HeaderText = "ID";
+            dtgPayment.Columns[0].DataPropertyName = "idPayment";
+            dtgPayment.Columns[1].HeaderText = "Folio";
+            dtgPayment.Columns[1].DataPropertyName = "ClavePayment";
+            dtgPayment.Columns[2].HeaderText = "Payment Porpuse";
+            dtgPayment.Columns[2].DataPropertyName = "PaymentPorpuse";
+            dtgPayment.Columns[3].HeaderText = "Solicitante";
+            dtgPayment.Columns[3].DataPropertyName = "idSolicitante";
+            dtgPayment.Columns[4].HeaderText = "Solicitante";
+            dtgPayment.Columns[4].DataPropertyName = "NomSolicitante";
+            dtgPayment.Columns[5].HeaderText = "Monto";
+            dtgPayment.Columns[5].DataPropertyName = "Amount";
+            dtgPayment.Columns[6].HeaderText = "Fecha Pago";
+            dtgPayment.Columns[6].DataPropertyName = "dtFechaPago";
+            dtgPayment.Columns[7].HeaderText = "Estatus";
+            dtgPayment.Columns[7].DataPropertyName = "ClaEstatus";
+            dtgPayment.Columns[8].HeaderText = "Estatus";
+            dtgPayment.Columns[8].DataPropertyName = "NomEstatus";
+
+            dtgPayment.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            bindingSource1.DataSource = dt;
+            dtgPayment.DataSource = bindingSource1;
+        }
         private void dtgPayment_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             DataTable dt = new DataTable();
             int id,beneficiario=0,empleado=0,proveedor=0,renglon=0;
             renglon = dtgPayment.CurrentRow.Index;
-            if (renglon > 0)
+            if (renglon >= 0)
             {
 
                 id = int.Parse(dtgPayment.Rows[e.RowIndex].Cells[0].Value.ToString());
@@ -140,7 +191,7 @@ namespace PaymentD
                 ClaEstatusPerm = int.Parse(dt.Rows[0]["ClaEstatus"].ToString());
                 txtAmount.Text = dt.Rows[0]["Amount"].ToString();
                 Idpayment = id;
-
+                
 
 
                 if (ClaEstatusPerm == 4 || ClaEstatusPerm == 3 || _tipoUsuario == 2)
@@ -170,57 +221,7 @@ namespace PaymentD
             }
         }
 
-        private void ConsultaCaptura_Load(object sender, EventArgs e)
-        {
-            Formato(_tipoUsuario);
-            
-            Proc.combos(cmbArea, 1);
-            Proc.combos(cmbMpago, 5);
-            Proc.combos(cmbMoneda, 3);
-            Proc.combos(cmbEstatus, 2);
-            Proc.combos(cmbBeneficiario, 7);
-            Proc.combos(cmbEmpleado, 6);
-            Proc.combos(cmbAsignado, 8);
-            cmbArea.SelectedValue = 0;
-            cmbMpago.SelectedValue = 0;
-            cmbMoneda.SelectedValue = 0;
-            cmbBeneficiario.SelectedValue = 0;
-            cmbAsignado.SelectedValue = 0;
-            cmbEmpleado.SelectedValue = 0;
-            cmbEstatus.SelectedValue = 0;
-
-
-            DataTable dt = new DataTable();
-            dt = Proc.llenarData(_tipoUsuario,_usuario, dtpFecha.Value);
-
-
-            dtgPayment.AutoGenerateColumns = false;
-            dtgPayment.ColumnCount = 9;
-
-            dtgPayment.Columns[0].HeaderText = "ID";
-            dtgPayment.Columns[0].DataPropertyName = "idPayment";
-            dtgPayment.Columns[1].HeaderText = "Folio";
-            dtgPayment.Columns[1].DataPropertyName = "ClavePayment";
-            dtgPayment.Columns[2].HeaderText = "Payment Porpuse";
-            dtgPayment.Columns[2].DataPropertyName = "PaymentPorpuse";
-            dtgPayment.Columns[3].HeaderText = "Solicitante";
-            dtgPayment.Columns[3].DataPropertyName = "idSolicitante";
-            dtgPayment.Columns[4].HeaderText = "Solicitante";
-            dtgPayment.Columns[4].DataPropertyName = "NomSolicitante";
-            dtgPayment.Columns[5].HeaderText = "Monto";
-            dtgPayment.Columns[5].DataPropertyName = "Amount";
-            dtgPayment.Columns[6].HeaderText = "Fecha Pago";
-            dtgPayment.Columns[6].DataPropertyName = "dtFechaPago";
-            dtgPayment.Columns[7].HeaderText = "Estatus";
-            dtgPayment.Columns[7].DataPropertyName = "ClaEstatus";
-            dtgPayment.Columns[8].HeaderText = "Estatus";
-            dtgPayment.Columns[8].DataPropertyName = "NomEstatus";
-      
-            dtgPayment.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-            bindingSource1.DataSource = dt;
-            dtgPayment.DataSource = bindingSource1;
-        }
+       
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
@@ -312,7 +313,7 @@ namespace PaymentD
         {
             if (_tipoUsuario == 1)
             {
-                if (dtgPaymentDocs.CurrentRow.Index>0)
+                if (dtgPaymentDocs.CurrentRow.Index>=0)
                 {
                     DataTable dtdocs = new DataTable();
                     int IdPayments, iddocs;
@@ -358,6 +359,11 @@ namespace PaymentD
                     MessageBox.Show("El documento fue creado con exito en la ruta: " + fullfilepath, "Descarga exitosa", MessageBoxButtons.OK);
                 }
             }
+        }
+
+        private void dtgPayment_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
 
         private void cmbEmpleado_SelectedIndexChanged(object sender, EventArgs e)
@@ -517,7 +523,7 @@ namespace PaymentD
 
 
                 dtgPaymentDet.AutoGenerateColumns = false;
-                dtgPaymentDet.ColumnCount = 6;
+                dtgPaymentDet.ColumnCount = 7; 
 
                 dtgPaymentDet.Columns[0].HeaderText = "ID";
                 dtgPaymentDet.Columns[0].DataPropertyName = "idPayment";
@@ -529,8 +535,10 @@ namespace PaymentD
                 dtgPaymentDet.Columns[3].DataPropertyName = "ClaveCentro";
                 dtgPaymentDet.Columns[4].HeaderText = "Centro de Costos";
                 dtgPaymentDet.Columns[4].DataPropertyName = "NomCostos";
-                dtgPaymentDet.Columns[5].HeaderText = "Monto ($)";
-                dtgPaymentDet.Columns[5].DataPropertyName = "AmountD";
+                dtgPaymentDet.Columns[5].HeaderText = "Budget";
+                dtgPaymentDet.Columns[5].DataPropertyName = "NomBudget";
+                dtgPaymentDet.Columns[6].HeaderText = "Monto ($)";
+                dtgPaymentDet.Columns[6].DataPropertyName = "AmountD";
 
 
                 dtgPaymentDet.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;

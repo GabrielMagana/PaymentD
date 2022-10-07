@@ -63,12 +63,6 @@
             this.NombreDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ExtensionDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dtgPaymentDet = new System.Windows.Forms.DataGridView();
-            this.Payment = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PaymentDet = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IdCostCenter = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClaveCentro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NomCostos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AmountD = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label11 = new System.Windows.Forms.Label();
             this.txtFolio = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
@@ -94,6 +88,13 @@
             this.label10 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.Payment = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PaymentDet = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdCostCenter = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClaveCentro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NomCostos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AmountD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColBudget = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgPayment)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -167,6 +168,7 @@
             this.dtgPayment.RowHeadersWidth = 51;
             this.dtgPayment.Size = new System.Drawing.Size(425, 418);
             this.dtgPayment.TabIndex = 0;
+            this.dtgPayment.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgPayment_CellContentClick);
             this.dtgPayment.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgPayment_CellDoubleClick);
             // 
             // IdPayment
@@ -471,7 +473,8 @@
             this.IdCostCenter,
             this.ClaveCentro,
             this.NomCostos,
-            this.AmountD});
+            this.AmountD,
+            this.ColBudget});
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -494,57 +497,6 @@
             this.dtgPaymentDet.RowHeadersWidth = 51;
             this.dtgPaymentDet.Size = new System.Drawing.Size(354, 295);
             this.dtgPaymentDet.TabIndex = 48;
-            // 
-            // Payment
-            // 
-            this.Payment.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.Payment.HeaderText = "IdPayment";
-            this.Payment.MinimumWidth = 6;
-            this.Payment.Name = "Payment";
-            this.Payment.ReadOnly = true;
-            this.Payment.Visible = false;
-            // 
-            // PaymentDet
-            // 
-            this.PaymentDet.HeaderText = "IdPaymentEnc";
-            this.PaymentDet.MinimumWidth = 6;
-            this.PaymentDet.Name = "PaymentDet";
-            this.PaymentDet.ReadOnly = true;
-            this.PaymentDet.Visible = false;
-            this.PaymentDet.Width = 125;
-            // 
-            // IdCostCenter
-            // 
-            this.IdCostCenter.HeaderText = "Id Costo";
-            this.IdCostCenter.MinimumWidth = 6;
-            this.IdCostCenter.Name = "IdCostCenter";
-            this.IdCostCenter.ReadOnly = true;
-            this.IdCostCenter.Visible = false;
-            this.IdCostCenter.Width = 125;
-            // 
-            // ClaveCentro
-            // 
-            this.ClaveCentro.HeaderText = "Clave Centro de Costos";
-            this.ClaveCentro.MinimumWidth = 6;
-            this.ClaveCentro.Name = "ClaveCentro";
-            this.ClaveCentro.ReadOnly = true;
-            this.ClaveCentro.Width = 110;
-            // 
-            // NomCostos
-            // 
-            this.NomCostos.HeaderText = "Centro de Costos";
-            this.NomCostos.MinimumWidth = 6;
-            this.NomCostos.Name = "NomCostos";
-            this.NomCostos.ReadOnly = true;
-            this.NomCostos.Width = 125;
-            // 
-            // AmountD
-            // 
-            this.AmountD.HeaderText = "Monto ($)";
-            this.AmountD.MinimumWidth = 6;
-            this.AmountD.Name = "AmountD";
-            this.AmountD.ReadOnly = true;
-            this.AmountD.Width = 125;
             // 
             // label11
             // 
@@ -804,6 +756,64 @@
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
+            // Payment
+            // 
+            this.Payment.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Payment.HeaderText = "IdPayment";
+            this.Payment.MinimumWidth = 6;
+            this.Payment.Name = "Payment";
+            this.Payment.ReadOnly = true;
+            this.Payment.Visible = false;
+            this.Payment.Width = 80;
+            // 
+            // PaymentDet
+            // 
+            this.PaymentDet.HeaderText = "IdPaymentEnc";
+            this.PaymentDet.MinimumWidth = 6;
+            this.PaymentDet.Name = "PaymentDet";
+            this.PaymentDet.ReadOnly = true;
+            this.PaymentDet.Visible = false;
+            this.PaymentDet.Width = 125;
+            // 
+            // IdCostCenter
+            // 
+            this.IdCostCenter.HeaderText = "Id Costo";
+            this.IdCostCenter.MinimumWidth = 6;
+            this.IdCostCenter.Name = "IdCostCenter";
+            this.IdCostCenter.ReadOnly = true;
+            this.IdCostCenter.Visible = false;
+            this.IdCostCenter.Width = 125;
+            // 
+            // ClaveCentro
+            // 
+            this.ClaveCentro.HeaderText = "Clave Centro de Costos";
+            this.ClaveCentro.MinimumWidth = 6;
+            this.ClaveCentro.Name = "ClaveCentro";
+            this.ClaveCentro.ReadOnly = true;
+            this.ClaveCentro.Width = 110;
+            // 
+            // NomCostos
+            // 
+            this.NomCostos.HeaderText = "Centro de Costos";
+            this.NomCostos.MinimumWidth = 6;
+            this.NomCostos.Name = "NomCostos";
+            this.NomCostos.ReadOnly = true;
+            this.NomCostos.Width = 125;
+            // 
+            // AmountD
+            // 
+            this.AmountD.HeaderText = "Monto ($)";
+            this.AmountD.MinimumWidth = 6;
+            this.AmountD.Name = "AmountD";
+            this.AmountD.ReadOnly = true;
+            this.AmountD.Width = 125;
+            // 
+            // ColBudget
+            // 
+            this.ColBudget.HeaderText = "Budget";
+            this.ColBudget.Name = "ColBudget";
+            this.ColBudget.ReadOnly = true;
+            // 
             // frmConsultaCaptura
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -885,13 +895,14 @@
         private System.Windows.Forms.Button btnActualizar;
         private System.Windows.Forms.CheckBox esPagado;
         private System.Windows.Forms.Button btnActualizarP;
+        private System.Windows.Forms.CheckBox esinmediato;
+        private System.Windows.Forms.CheckBox esCaja;
         private System.Windows.Forms.DataGridViewTextBoxColumn Payment;
         private System.Windows.Forms.DataGridViewTextBoxColumn PaymentDet;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdCostCenter;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClaveCentro;
         private System.Windows.Forms.DataGridViewTextBoxColumn NomCostos;
         private System.Windows.Forms.DataGridViewTextBoxColumn AmountD;
-        private System.Windows.Forms.CheckBox esinmediato;
-        private System.Windows.Forms.CheckBox esCaja;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColBudget;
     }
 }

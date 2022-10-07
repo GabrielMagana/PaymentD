@@ -24,17 +24,34 @@ namespace PaymentD
         string _extFA, _extP, _extnvpdf, _extInvxml, _extb2b;
         bool PaymentU = false;
 
+        private void cmbArea_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Proc.combos(cmbBudget, 10, int.Parse(cmbArea.SelectedValue.ToString()));
+            if (cmbBudget.Items.Count > 0) 
+            {
+                cmbBudget.SelectedIndex = 0;
+            }
+             else   
+            {
+                cmbBudget.DataSource=null;
+                cmbBudget.SelectedText = "";
+                cmbBudget.SelectedIndex = -1;
+
+            }
+        }
+
         public frmPaymentCaptura(int NNomina, string Usuario, string NomCompleto,string correo)
         {
             InitializeComponent();
-            Proc.combos(cmbArea, 1);
-            Proc.combos(cmbMpago, 5);
-            Proc.combos(cmbMoneda, 3);
-            Proc.combos(cmbEstatus, 2);
-            Proc.combos(cmbCliente, 7);
-            Proc.combos(cmbAsignado, 8);
+            Proc.combos(cmbArea, 1,0);
+            Proc.combos(cmbMpago, 5,0);
+            Proc.combos(cmbMoneda, 3,0);
+            Proc.combos(cmbEstatus, 2,0);
+            Proc.combos(cmbCliente, 7,0);
+            Proc.combos(cmbAsignado, 8,0);
           
-            Proc.combos(cmbCcostos, 4);
+            Proc.combos(cmbCcostos, 4,0);
+            Proc.combos(cmbBudget, 10, 1);
             cmbArea.SelectedValue = 1;
             cmbMpago.SelectedValue = 1;
             cmbMoneda.SelectedValue = 1;
@@ -82,25 +99,53 @@ namespace PaymentD
 
         private void cmbCliente_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cmbCliente.GetItemText(cmbCliente.SelectedItem) == "PROVEEDORES VARIOS")
-            { chkCaja.Visible = true; }
-            else { chkCaja.Visible = false; chkCaja.Checked = false; }
+            DataTable dtc = new DataTable();
+            DataTable dtp = new DataTable();
+            DataTable dtpu = new DataTable();
 
-            if (cmbCliente.GetItemText(cmbCliente.SelectedItem) == "PROVEEDORES VARIOS" || cmbCliente.GetItemText(cmbCliente.SelectedItem) == "ANTICIPO PCR" || cmbCliente.GetItemText(cmbCliente.SelectedItem) == "SI VALE MEXICO SA DE CV" )
+            string cajachica = "", pagoinmediato = "", paymentunico = "";
+
+            dtc = Proc.ObtenerConfiguraciones(5);
+            dtp = Proc.ObtenerConfiguraciones(6);
+            dtpu = Proc.ObtenerConfiguraciones(7);
+
+            cajachica = dtc.Rows[0]["Valor1"].ToString().Trim();
+            pagoinmediato = dtp.Rows[0]["Valor1"].ToString().Trim();
+            paymentunico = dtpu.Rows[0]["Valor1"].ToString().Trim();
+
+            foreach (string tipo in cajachica.Split(','))
             {
-                chkpago.Visible = true;
-            }
-            else
-            {
-                chkpago.Visible = false;
-                chkpago.Checked = false;
-                
+                if (cmbCliente.GetItemText(cmbCliente.SelectedValue) == tipo)
+                {
+                    chkCaja.Visible = true;
+                    break;
+                }
+                else
+                { chkCaja.Visible = false; chkCaja.Checked = false; }
             }
 
-            if (cmbCliente.GetItemText(cmbCliente.SelectedItem) == "LICENCIAS" || cmbCliente.GetItemText(cmbCliente.SelectedItem) == "PROVEEDORES VARIOS" || cmbCliente.GetItemText(cmbCliente.SelectedItem) == "SECRETARIA DE HACIENDA Y CREDITO PUBLICO" || cmbCliente.GetItemText(cmbCliente.SelectedItem) == "SECRETARIA DE FINANZAS, INVERSION Y ADMINISTRACION")
+            foreach (string tipo in pagoinmediato.Split(','))
             {
-                PaymentU = true;
-               
+                if (cmbCliente.GetItemText(cmbCliente.SelectedValue) == tipo)
+                {
+                    chkpago.Visible = true;
+                    break;
+                }
+                else
+                {
+                    chkpago.Visible = false; chkpago.Checked = false;
+                }
+            }
+
+            foreach (string tipo in paymentunico.Split(','))
+            {
+                if (cmbCliente.GetItemText(cmbCliente.SelectedValue) == tipo)
+                {
+                    PaymentU = true;
+                    break;
+                }
+                else
+                { PaymentU = false; }
             }
         }
 
@@ -321,8 +366,13 @@ namespace PaymentD
                     ListViewItem lista = new ListViewItem(cmbCcostos.SelectedValue.ToString());
                     lista.SubItems.Add(cmbCcostos.Text);
                     lista.SubItems.Add(txtMonto.Text);
+                    lista.SubItems.Add(cmbBudget.GetItemText(cmbBudget.SelectedItem));
                     lista.SubItems.Add(cmbMoneda.GetItemText(cmbMoneda.SelectedItem));
+                    lista.SubItems.Add(cmbBudget.SelectedValue.ToString());
+
                     lstCC.Items.Add(lista);
+                   
+
                 }
                 else
                 {
@@ -338,7 +388,8 @@ namespace PaymentD
                             lstCC.Items[i].SubItems[2].Text = valor.ToString();
                             Existe = true;
 
-
+                            lstCC.Items[i].SubItems[3].Text = cmbBudget.Text;
+                            lstCC.Items[i].SubItems[5].Text = cmbBudget.SelectedValue.ToString();
                         }
 
                         //MessageBox.Show(ltvArticulos.Items[i].SubItems[ii].Text);
@@ -350,7 +401,10 @@ namespace PaymentD
                         ListViewItem lista = new ListViewItem(cmbCcostos.SelectedValue.ToString());
                         lista.SubItems.Add(cmbCcostos.Text);
                         lista.SubItems.Add(txtMonto.Text);
+                        lista.SubItems.Add(cmbBudget.GetItemText(cmbBudget.SelectedItem));
                         lista.SubItems.Add(cmbMoneda.GetItemText(cmbMoneda.SelectedItem));
+                        lista.SubItems.Add(cmbBudget.SelectedValue.ToString());
+
                         lstCC.Items.Add(lista);
                     }
 
@@ -358,6 +412,7 @@ namespace PaymentD
                 Existe = false;
 
                 lstCC.AutoResizeColumns(ColumnHeaderAutoResizeStyle.None);
+                
             }
             else
             {
